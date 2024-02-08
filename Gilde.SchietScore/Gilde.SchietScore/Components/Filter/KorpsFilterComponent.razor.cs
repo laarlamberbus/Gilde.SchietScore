@@ -1,4 +1,4 @@
-﻿using Gilde.SchietScore.Models;
+﻿using Gilde.SchietScore.Dtos;
 using Microsoft.AspNetCore.Components;
 
 namespace Gilde.SchietScore.Components.Filter
@@ -6,11 +6,11 @@ namespace Gilde.SchietScore.Components.Filter
     public partial class KorpsFilterComponent
     {
         [Parameter]
-        public Korps SelectedKorps { get; set; }
+        public KorpsDto SelectedKorps { get; set; }
         [Parameter]
-        public EventCallback<Korps> SelectedKorpsChanged { get; set; }
+        public EventCallback<KorpsDto> SelectedKorpsChanged { get; set; }
 
-        protected async Task OnKorpsSelection(Korps selectedKorps)
+        protected async Task OnKorpsSelection(KorpsDto selectedKorps)
         {
             SelectedKorps = selectedKorps;
             await SelectedKorpsChanged.InvokeAsync(SelectedKorps);

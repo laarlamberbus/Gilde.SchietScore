@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gilde.SchietScore", "Gilde.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gilde.SchietScore.Client", "Gilde.SchietScore\Gilde.SchietScore.Client\Gilde.SchietScore.Client.csproj", "{9DCE09FE-8B8A-47C0-805E-2D4A56CAF5E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gilde.SchietScore.Models", "Gilde.SchietScore.Models\Gilde.SchietScore.Models.csproj", "{F2F9B12B-5B6A-459D-BD07-3643A479773E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9DCE09FE-8B8A-47C0-805E-2D4A56CAF5E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DCE09FE-8B8A-47C0-805E-2D4A56CAF5E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DCE09FE-8B8A-47C0-805E-2D4A56CAF5E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2F9B12B-5B6A-459D-BD07-3643A479773E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2F9B12B-5B6A-459D-BD07-3643A479773E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2F9B12B-5B6A-459D-BD07-3643A479773E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2F9B12B-5B6A-459D-BD07-3643A479773E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

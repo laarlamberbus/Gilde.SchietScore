@@ -1,9 +1,10 @@
 ﻿using Gilde.SchietScore.Data.Services.Interfaces;
+using Gilde.SchietScore.Dtos;
 using Gilde.SchietScore.Factories;
 using Gilde.SchietScore.Models;
 using Microsoft.AspNetCore.Components;
 
-namespace Gilde.SchietScore.Components.Pages
+namespace Gilde.SchietScore.Components.Pages.Scores
 {
     public partial class EditScorePage
     {
@@ -18,7 +19,7 @@ namespace Gilde.SchietScore.Components.Pages
 
         public int SelectedYear { get; set; } = DateTime.Now.Year;
         public DateOnly? SelectedWeek { get; set; }
-        public Korps SelectedKorps { get; set; } = KorpsList.AllKorps.Single(k => k.Level == 0);
+        public KorpsDto SelectedKorps { get; set; } = KorpsList.AllKorps.Single(k => k.Level == 0);
         public List<DateOnly> AllGameWeeks { get; set; }
         public List<int> AllGameYears { get; set; }
         public string Title { get; set; } = $"Uitslagen {_currentYear}";
@@ -31,7 +32,7 @@ namespace Gilde.SchietScore.Components.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            if(_gameElementService != null)
+            if (_gameElementService != null)
             {
                 AllGameYears = await _gameElementService.GetUniqueGameYears();
                 AllGameWeeks = await _gameElementService.GetUniqueGameWeeks(SelectedYear);
@@ -45,7 +46,7 @@ namespace Gilde.SchietScore.Components.Pages
 
         protected async Task SubmitScoreFrom()
         {
-            if(_gameElementService != null && SelectedWeek.HasValue)
+            if (_gameElementService != null && SelectedWeek.HasValue)
                 await _gameElementService.EditScores(_scoreFormFactory.CreateScores(_scoreEditForms, SelectedWeek.Value));
 
             _navigationManager.NavigateTo("uitslagen");
@@ -80,13 +81,13 @@ namespace Gilde.SchietScore.Components.Pages
                 AllGameWeeks = await _gameElementService.GetUniqueGameWeeks(SelectedYear);
                 _scores = await _gameElementService.GetScores(SelectedYear, SelectedKorps.Level, SelectedWeek);
                 var shootingmembers = await _memberService.GetMembers(true);
-                _shootingMembers = shootingmembers.Where(s => (s.Level == SelectedKorps.Level) || (SelectedKorps.Level == 0)).ToList();
+                _shootingMembers = shootingmembers.Where(s => s.Level == SelectedKorps.Level || SelectedKorps.Level == 0).ToList();
             }
             BuildForm();
         }
         private async Task RetrieveShootingMembers()
         {
-            if(_memberService != null)
+            if (_memberService != null)
                 _shootingMembers = await _memberService.GetMembers(true);
         }
         private async Task RetrieveGameElements()

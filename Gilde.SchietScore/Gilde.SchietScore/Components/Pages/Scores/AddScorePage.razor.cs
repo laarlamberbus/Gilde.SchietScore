@@ -3,7 +3,7 @@ using Gilde.SchietScore.Factories;
 using Gilde.SchietScore.Models;
 using Microsoft.AspNetCore.Components;
 
-namespace Gilde.SchietScore.Components.Pages
+namespace Gilde.SchietScore.Components.Pages.Scores
 {
     public partial class AddScorePage
     {
@@ -37,9 +37,9 @@ namespace Gilde.SchietScore.Components.Pages
             }
         }
 
-        protected async Task  SubmitScoreFrom()
+        protected async Task SubmitScoreFrom()
         {
-            if(_gameElementService != null)
+            if (_gameElementService != null)
                 await _gameElementService.SaveScores(_scoreAddForms, today);
 
             _navigationManager.NavigateTo("uitslagen");
@@ -47,7 +47,7 @@ namespace Gilde.SchietScore.Components.Pages
 
         private async Task RetrieveShootingMembers()
         {
-            if(_memberService != null)
+            if (_memberService != null)
                 _shootingMembers = await _memberService.GetMembers(true);
         }
         private async Task RetrieveGameElements()

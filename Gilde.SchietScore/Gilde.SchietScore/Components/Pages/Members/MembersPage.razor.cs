@@ -2,7 +2,7 @@
 using Gilde.SchietScore.Models;
 using Microsoft.AspNetCore.Components;
 
-namespace Gilde.SchietScore.Components.Pages
+namespace Gilde.SchietScore.Components.Pages.Members
 {
     public partial class MembersPage
     {
@@ -13,7 +13,7 @@ namespace Gilde.SchietScore.Components.Pages
 
         protected async override Task OnInitializedAsync()
         {
-            if(MemberService != null)
+            if (MemberService != null)
                 _members = await MemberService.GetMembers();
         }
     }
