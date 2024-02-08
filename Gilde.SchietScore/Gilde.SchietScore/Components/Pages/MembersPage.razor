@@ -1,0 +1,48 @@
+﻿@page "/leden"
+
+<PageTitle>Leden</PageTitle>
+<AuthorizeView>
+    <h1>Leden</h1>
+
+    <p>Dit is een overzicht van alle leden</p>
+
+    @if (_members == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div class="tableFixHeadLarge">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Naam</th>
+                        <th>Korps</th>
+                        <th>Schietend lid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var member in _members)
+                    {
+                        <tr>
+                            <td>@member.Id</td>
+                            <td>@member.Name</td>
+                            <td>Korps @member.Level</td>
+                            <td>
+                                @if (member.IsShootingMember)
+                                {
+                                    <text>Ja</text>
+                                }
+                                else
+                                {
+                                    <text>Nee</text>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</AuthorizeView>

@@ -1,0 +1,6 @@
+﻿<div class="uitslagen-datum-container">
+    @foreach (var gameDate in AllGameWeeks)
+    {
+        <button class="btn btn-secondary" @onclick="@(() => OnGameDateSelection(new DateOnly(day: gameDate.Day, month: gameDate.Month, year: gameDate.Year)))">@gameDate.Day-@gameDate.Month</button>
+    }
+</div>

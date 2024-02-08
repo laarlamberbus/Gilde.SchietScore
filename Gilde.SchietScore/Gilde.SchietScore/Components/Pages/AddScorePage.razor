@@ -1,0 +1,60 @@
+﻿@page "/uitslagen-toevoegen"
+@using Models
+@rendermode InteractiveServer
+
+<PageTitle>Uitslagen toevoegen</PageTitle>
+<AuthorizeView Context="Auth">
+    @if (_shootingMembers == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <EditForm Model=@_scoreAddForms OnSubmit=@SubmitScoreFrom>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h1>Uitslagen toevoegen</h1>
+            </div>
+        <div style="display: flex; justify-content: flex-end; align-items: center;">
+            <label style="margin-right:10px;"><b>Schiet datum:</b></label>
+            <InputDate Type="InputDateType.Date" @bind-Value="@today" />
+        </div>
+        <div class="tableFixHeadLarge">
+            <table class="table table-striped table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Naam</th>
+                        <th>Wedstrijd element</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var scoreAddForm in _scoreAddForms)
+                    {
+                        <tr>
+                            <th scope="row">@scoreAddForm.MemberName</th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        @foreach (var scoreAddRow in scoreAddForm.ScoreAddRows)
+                        {
+                            <tr>
+                                <td></td>
+                                <td>@scoreAddRow.GameElementName</td>
+                                <td>
+                                    <InputNumber @bind-Value="scoreAddRow.Score" placeholder="Vul score in" /> 
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        @if (_shootingMembers != null)
+        {
+            <div style="display: flex; justify-content: flex-end; align-items: center; margin-top: 20px;">
+                <input type="submit" value="Opslaan" class="btn btn-primary" />
+            </div>
+        }
+        </EditForm>
+    }
+</AuthorizeView>

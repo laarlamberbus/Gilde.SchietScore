@@ -1,0 +1,6 @@
+﻿<div class="uitslagen-datum-container">
+    @foreach (var year in AllGameYears)
+    {
+        <button class="btn btn-primary" @onclick="@(() => OnYearSelection(year))">@year</button>
+    }
+</div>
