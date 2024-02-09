@@ -1,0 +1,37 @@
+﻿@page "/schutters"
+
+<PageTitle>Schutters</PageTitle>
+<AuthorizeView>
+    <h1>Schutters</h1>
+
+    <p>Dit is een overzicht van alle schutters</p>
+
+    @if (Schutters == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div class="tableFixHeadLarge">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Naam</th>
+                        <th>Klasse</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var lid in Schutters)
+                    {
+                        <tr>
+                            <td>@lid.Id</td>
+                            <td>@lid.Naam</td>
+                            <td>@lid.DeelnemerClassType</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</AuthorizeView>

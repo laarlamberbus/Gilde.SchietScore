@@ -1,4 +1,4 @@
-using Gilde.SchietScore.Data;
+using Gilde.SchietScore.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 

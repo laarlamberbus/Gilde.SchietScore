@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -8,14 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Gilde.SchietScore.Models\Gilde.SchietScore.Models.csproj" />
+    <ProjectReference Include="..\..\Gilde.SchietScore.Application\Gilde.SchietScore.Application.csproj" />
+    <ProjectReference Include="..\..\Gilde.SchietScore.DataAccess\Gilde.SchietScore.Persistence.csproj" />
+    <ProjectReference Include="..\..\Gilde.SchietScore.Models\Gilde.SchietScore.Domain.csproj" />
     <ProjectReference Include="..\Gilde.SchietScore.Client\Gilde.SchietScore.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.1" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>

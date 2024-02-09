@@ -2,7 +2,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using Gilde.SchietScore.Components.Account.Pages;
 using Gilde.SchietScore.Components.Account.Pages.Manage;
-using Gilde.SchietScore.Data;
+using Gilde.SchietScore.Domain;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;

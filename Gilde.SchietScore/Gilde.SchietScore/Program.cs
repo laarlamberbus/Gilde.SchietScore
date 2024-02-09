@@ -1,11 +1,9 @@
 using Gilde.SchietScore.Components;
 using Gilde.SchietScore.Components.Account;
-using Gilde.SchietScore.Data;
-using Gilde.SchietScore.Data.Services;
-using Gilde.SchietScore.Data.Services.Interfaces;
+using Gilde.SchietScore.Domain;
+using Gilde.SchietScore.Persistence;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Gilde.SchietScore
 {
@@ -24,9 +22,6 @@ namespace Gilde.SchietScore
             builder.Services.AddScoped<IdentityUserAccessor>();
             builder.Services.AddScoped<IdentityRedirectManager>();
             builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
-            builder.Services.AddTransient<ISchietScoreDbContext, SchietScoreDbContext>();
-            builder.Services.AddTransient<IMemberService, MemberService>();
-            builder.Services.AddTransient<IGameElementService, GameElementService>();
 
             builder.Services.AddAuthentication(options =>
                 {
@@ -35,15 +30,7 @@ namespace Gilde.SchietScore
                 })
                 .AddIdentityCookies();
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<SchietScoreDbContext>(options =>
-                options.UseNpgsql(connectionString));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-            builder.Services.AddIdentityCore<SchietScoreUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<SchietScoreDbContext>()
-                .AddSignInManager()
-                .AddDefaultTokenProviders();
+            builder.Services.AddPersistence(builder.Configuration);
 
             builder.Services.AddSingleton<IEmailSender<SchietScoreUser>, IdentityNoOpEmailSender>();
 
@@ -53,7 +40,7 @@ namespace Gilde.SchietScore
             if (app.Environment.IsDevelopment())
             {
                 app.UseWebAssemblyDebugging();
-                app.UseMigrationsEndPoint();
+                //app.UseMigrationsEndPoint();
             }
             else
             {

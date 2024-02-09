@@ -1,4 +1,4 @@
-﻿namespace Gilde.SchietScore.Models
+﻿namespace Gilde.SchietScore.Domain
 {
     public class Vrijehand : Wedstrijd
     {
