@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gilde.SchietScore.Client", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gilde.SchietScore.Domain", "Gilde.SchietScore.Models\Gilde.SchietScore.Domain.csproj", "{F2F9B12B-5B6A-459D-BD07-3643A479773E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gilde.SchietScore.Persistence", "Gilde.SchietScore.DataAccess\Gilde.SchietScore.Persistence.csproj", "{6902FBA1-051F-49EB-8115-92869EAAE1AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gilde.SchietScore.Persistence", "Gilde.SchietScore.DataAccess\Gilde.SchietScore.Persistence.csproj", "{6902FBA1-051F-49EB-8115-92869EAAE1AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gilde.SchietScore.Application", "Gilde.SchietScore.Application\Gilde.SchietScore.Application.csproj", "{77BCB0C0-1F17-4CD4-8638-E20F06BD109A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gilde.SchietScore.Application", "Gilde.SchietScore.Application\Gilde.SchietScore.Application.csproj", "{77BCB0C0-1F17-4CD4-8638-E20F06BD109A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. Domain", "00. Domain", "{BE56428E-F0B3-4682-BDDF-70BBA3BCE798}"
 EndProject
@@ -20,6 +20,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20. Business", "20. Business", "{46D65853-4608-40F0-808D-F0C2A0AEFD5D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "30. DataAccess", "30. DataAccess", "{9706181D-0809-4F08-882A-80F4D161EF82}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. CompositionRoot", "00. CompositionRoot", "{FF77D8FB-5590-4E19-85E3-622F375CE75C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gilde.SchietScore.CompositionRoot", "Gilde.SchietScore.CompositionRoot\Gilde.SchietScore.CompositionRoot.csproj", "{2671648E-D6F3-4DF1-BCFD-B54802698BEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,10 @@ Global
 		{77BCB0C0-1F17-4CD4-8638-E20F06BD109A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77BCB0C0-1F17-4CD4-8638-E20F06BD109A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77BCB0C0-1F17-4CD4-8638-E20F06BD109A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2671648E-D6F3-4DF1-BCFD-B54802698BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2671648E-D6F3-4DF1-BCFD-B54802698BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2671648E-D6F3-4DF1-BCFD-B54802698BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2671648E-D6F3-4DF1-BCFD-B54802698BEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +65,7 @@ Global
 		{F2F9B12B-5B6A-459D-BD07-3643A479773E} = {BE56428E-F0B3-4682-BDDF-70BBA3BCE798}
 		{6902FBA1-051F-49EB-8115-92869EAAE1AF} = {9706181D-0809-4F08-882A-80F4D161EF82}
 		{77BCB0C0-1F17-4CD4-8638-E20F06BD109A} = {46D65853-4608-40F0-808D-F0C2A0AEFD5D}
+		{2671648E-D6F3-4DF1-BCFD-B54802698BEC} = {FF77D8FB-5590-4E19-85E3-622F375CE75C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {89F1F7AD-70C5-48D2-A103-0ABABF817D23}

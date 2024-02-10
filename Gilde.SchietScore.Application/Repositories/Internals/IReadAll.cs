@@ -2,6 +2,6 @@
 {
     public interface IReadAll<T> where T : class
     {
-        Task<IEnumerable<T>> ReadAll();
+        Task<IEnumerable<T>> ReadAll(CancellationToken cancellationToken = default);
     }
 }

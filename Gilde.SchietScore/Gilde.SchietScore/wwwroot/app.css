@@ -52,7 +52,7 @@ h1:focus {
 
 .tableFixHeadLarge {
     overflow: auto;
-    height: 70vh;
+    height: 75vh;
 }
 
     .tableFixHeadLarge thead th {
@@ -88,4 +88,9 @@ th, td {
 
 th {
     background: #eee;
+}
+.container-btn-save{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }

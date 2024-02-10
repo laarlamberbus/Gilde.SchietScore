@@ -2,6 +2,6 @@
 {
     public interface IDelete<T> : ISave where T : class
     {
-        void Delete(T entity);
+        Task Delete(int id, CancellationToken cancellationToken = default);
     }
 }

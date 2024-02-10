@@ -75,7 +75,8 @@ namespace Gilde.SchietScore.Persistence.Migrations
                     Naam = table.Column<string>(type: "text", nullable: false),
                     KNTSNummer = table.Column<string>(type: "text", nullable: false),
                     IsSchietendLid = table.Column<bool>(type: "boolean", nullable: false),
-                    DeelnemerClassType = table.Column<string>(type: "text", nullable: false)
+                    DeelnemerClassType = table.Column<string>(type: "text", nullable: false),
+                    SoftDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -201,6 +202,102 @@ namespace Gilde.SchietScore.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Korpsen",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Naam = table.Column<string>(type: "text", nullable: false),
+                    GemiddeldeScore = table.Column<int>(type: "integer", nullable: false),
+                    CompetitieId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Korpsen", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Korpsen_Competities_CompetitieId",
+                        column: x => x.CompetitieId,
+                        principalTable: "Competities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LidDtoWedstrijdDto",
+                columns: table => new
+                {
+                    DeelnemersId = table.Column<int>(type: "integer", nullable: false),
+                    WedstrijdenId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LidDtoWedstrijdDto", x => new { x.DeelnemersId, x.WedstrijdenId });
+                    table.ForeignKey(
+                        name: "FK_LidDtoWedstrijdDto_Leden_DeelnemersId",
+                        column: x => x.DeelnemersId,
+                        principalTable: "Leden",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LidDtoWedstrijdDto_Wedstrijden_WedstrijdenId",
+                        column: x => x.WedstrijdenId,
+                        principalTable: "Wedstrijden",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Resultaten",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Score = table.Column<int>(type: "integer", nullable: false),
+                    WedstrijdId = table.Column<int>(type: "integer", nullable: false),
+                    DeelnemerId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Resultaten", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Resultaten_Leden_DeelnemerId",
+                        column: x => x.DeelnemerId,
+                        principalTable: "Leden",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Resultaten_Wedstrijden_WedstrijdId",
+                        column: x => x.WedstrijdId,
+                        principalTable: "Wedstrijden",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "KorpsDtoLidDto",
+                columns: table => new
+                {
+                    KorpsenId = table.Column<int>(type: "integer", nullable: false),
+                    LedenId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_KorpsDtoLidDto", x => new { x.KorpsenId, x.LedenId });
+                    table.ForeignKey(
+                        name: "FK_KorpsDtoLidDto_Korpsen_KorpsenId",
+                        column: x => x.KorpsenId,
+                        principalTable: "Korpsen",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_KorpsDtoLidDto_Leden_LedenId",
+                        column: x => x.LedenId,
+                        principalTable: "Leden",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -237,6 +334,31 @@ namespace Gilde.SchietScore.Persistence.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_KorpsDtoLidDto_LedenId",
+                table: "KorpsDtoLidDto",
+                column: "LedenId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Korpsen_CompetitieId",
+                table: "Korpsen",
+                column: "CompetitieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LidDtoWedstrijdDto_WedstrijdenId",
+                table: "LidDtoWedstrijdDto",
+                column: "WedstrijdenId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Resultaten_DeelnemerId",
+                table: "Resultaten",
+                column: "DeelnemerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Resultaten_WedstrijdId",
+                table: "Resultaten",
+                column: "WedstrijdId");
         }
 
         /// <inheritdoc />
@@ -258,7 +380,22 @@ namespace Gilde.SchietScore.Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Competities");
+                name: "KorpsDtoLidDto");
+
+            migrationBuilder.DropTable(
+                name: "LidDtoWedstrijdDto");
+
+            migrationBuilder.DropTable(
+                name: "Resultaten");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Korpsen");
 
             migrationBuilder.DropTable(
                 name: "Leden");
@@ -267,10 +404,7 @@ namespace Gilde.SchietScore.Persistence.Migrations
                 name: "Wedstrijden");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Competities");
         }
     }
 }

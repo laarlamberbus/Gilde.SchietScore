@@ -2,6 +2,6 @@
 {
     public interface ISave
     {
-        Task Save(CancellationToken cancellationToken);
+        Task SaveChanges(CancellationToken cancellationToken = default);
     }
 }

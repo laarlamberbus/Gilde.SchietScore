@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-
-namespace Gilde.SchietScore.Components.Filter
+﻿namespace Gilde.SchietScore.Components.Filter
 {
     public partial class KorpsFilterComponent
     {

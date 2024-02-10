@@ -1,0 +1,54 @@
+﻿@page "/vrijehand"
+@using Gilde.SchietScore.Domain
+@rendermode InteractiveServer
+@inject IJSRuntime JsRuntime
+
+<PageTitle>Vrijehand resultaten</PageTitle>
+<AuthorizeView Context="VrijehandAuthorization">
+    @if (true)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <h1>Vrijehand resultaten</h1>
+
+        <p>Dit is een overzicht van alle resultaten vrijehand</p>
+        @* <EditForm FormName="VrijehandForm" Model="_vrijehandResultaten" OnSubmit="@SaveResultaten">
+            <div class="tableFixHeadLarge">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Naam</th>
+                            <th>KNTS</th>
+                            <th>Klasse</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var vrijehandResultaat in _vrijehandResultaten.Value.Deelnemers)
+                        {
+                            <tr>
+                                <td>@vrijehandResultaat.Naam</td>
+                                <td><InputText @bind-Value="vrijehandResultaat.Score" placeholder="Vul naam in"></InputText></td>
+                                <td><InputText @bind-Value="vrijehandResultaat.KNTSNummer" placeholder="Vul KNTSnummer in"></InputText></td>
+                                <td>
+                                    <InputSelect @bind-Value="vrijehandResultaat.DeelnemerClassType">
+                                        <option value="@DeelnemerClassType.A">@DeelnemerClassType.A</option>
+                                        <option value="@DeelnemerClassType.B">@DeelnemerClassType.B</option>
+                                        <option value="@DeelnemerClassType.C">@DeelnemerClassType.C</option>
+                                    </InputSelect>
+                                </td>
+                                <td><i @onclick="(() => DeleteResultaat(vrijehandResultaat))" class="bi bi-trash" style="color:#3D040A; cursor: pointer; font-size:20px;"></i></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="container-btn-save">
+                <input type="submit" value="Opslaan" class="btn btn-primary" />
+            </div>
+        </EditForm> *@
+    }
+</AuthorizeView>

@@ -1,7 +1,7 @@
 using Gilde.SchietScore.Components;
 using Gilde.SchietScore.Components.Account;
+using Gilde.SchietScore.CompositionRoot;
 using Gilde.SchietScore.Domain;
-using Gilde.SchietScore.Persistence;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 
@@ -30,7 +30,7 @@ namespace Gilde.SchietScore
                 })
                 .AddIdentityCookies();
 
-            builder.Services.AddPersistence(builder.Configuration);
+            builder.Services.RegisterServices(builder.Configuration);
 
             builder.Services.AddSingleton<IEmailSender<SchietScoreUser>, IdentityNoOpEmailSender>();
 

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Gilde.SchietScore.Persistence.Migrations
 {
     [DbContext(typeof(SchietScoreDbContext))]
-    [Migration("20240209115452_InitialCreate")]
+    [Migration("20240209230347_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -112,6 +112,31 @@ namespace Gilde.SchietScore.Persistence.Migrations
                     b.ToTable("Competities");
                 });
 
+            modelBuilder.Entity("Gilde.SchietScore.Persistence.Dtos.KorpsDto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CompetitieId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("GemiddeldeScore")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Naam")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompetitieId");
+
+                    b.ToTable("Korpsen");
+                });
+
             modelBuilder.Entity("Gilde.SchietScore.Persistence.Dtos.LidDto", b =>
                 {
                     b.Property<int>("Id")
@@ -135,9 +160,38 @@ namespace Gilde.SchietScore.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("SoftDeleted")
+                        .HasColumnType("boolean");
+
                     b.HasKey("Id");
 
                     b.ToTable("Leden");
+                });
+
+            modelBuilder.Entity("Gilde.SchietScore.Persistence.Dtos.ResultaatDto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DeelnemerId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("WedstrijdId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeelnemerId");
+
+                    b.HasIndex("WedstrijdId");
+
+                    b.ToTable("Resultaten");
                 });
 
             modelBuilder.Entity("Gilde.SchietScore.Persistence.Dtos.WedstrijdDto", b =>
@@ -155,6 +209,36 @@ namespace Gilde.SchietScore.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Wedstrijden");
+                });
+
+            modelBuilder.Entity("KorpsDtoLidDto", b =>
+                {
+                    b.Property<int>("KorpsenId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LedenId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("KorpsenId", "LedenId");
+
+                    b.HasIndex("LedenId");
+
+                    b.ToTable("KorpsDtoLidDto");
+                });
+
+            modelBuilder.Entity("LidDtoWedstrijdDto", b =>
+                {
+                    b.Property<int>("DeelnemersId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("WedstrijdenId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("DeelnemersId", "WedstrijdenId");
+
+                    b.HasIndex("WedstrijdenId");
+
+                    b.ToTable("LidDtoWedstrijdDto");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -289,6 +373,66 @@ namespace Gilde.SchietScore.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Gilde.SchietScore.Persistence.Dtos.KorpsDto", b =>
+                {
+                    b.HasOne("Gilde.SchietScore.Persistence.Dtos.CompetitieDto", "Competitie")
+                        .WithMany("Korpsen")
+                        .HasForeignKey("CompetitieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Competitie");
+                });
+
+            modelBuilder.Entity("Gilde.SchietScore.Persistence.Dtos.ResultaatDto", b =>
+                {
+                    b.HasOne("Gilde.SchietScore.Persistence.Dtos.LidDto", "Deelnemer")
+                        .WithMany()
+                        .HasForeignKey("DeelnemerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gilde.SchietScore.Persistence.Dtos.WedstrijdDto", "Wedstrijd")
+                        .WithMany("Resultaten")
+                        .HasForeignKey("WedstrijdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Deelnemer");
+
+                    b.Navigation("Wedstrijd");
+                });
+
+            modelBuilder.Entity("KorpsDtoLidDto", b =>
+                {
+                    b.HasOne("Gilde.SchietScore.Persistence.Dtos.KorpsDto", null)
+                        .WithMany()
+                        .HasForeignKey("KorpsenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gilde.SchietScore.Persistence.Dtos.LidDto", null)
+                        .WithMany()
+                        .HasForeignKey("LedenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LidDtoWedstrijdDto", b =>
+                {
+                    b.HasOne("Gilde.SchietScore.Persistence.Dtos.LidDto", null)
+                        .WithMany()
+                        .HasForeignKey("DeelnemersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gilde.SchietScore.Persistence.Dtos.WedstrijdDto", null)
+                        .WithMany()
+                        .HasForeignKey("WedstrijdenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -338,6 +482,16 @@ namespace Gilde.SchietScore.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Gilde.SchietScore.Persistence.Dtos.CompetitieDto", b =>
+                {
+                    b.Navigation("Korpsen");
+                });
+
+            modelBuilder.Entity("Gilde.SchietScore.Persistence.Dtos.WedstrijdDto", b =>
+                {
+                    b.Navigation("Resultaten");
                 });
 #pragma warning restore 612, 618
         }

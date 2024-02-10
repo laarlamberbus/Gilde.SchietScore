@@ -1,5 +1,7 @@
 ﻿using Gilde.SchietScore.Application.Repositories;
 using Gilde.SchietScore.Domain;
+using Gilde.SchietScore.Persistence.Builders;
+using Gilde.SchietScore.Persistence.Builders.Interfaces;
 using Gilde.SchietScore.Persistence.Factories;
 using Gilde.SchietScore.Persistence.Factories.Interfaces;
 using Gilde.SchietScore.Persistence.Repositories;
@@ -16,6 +18,8 @@ namespace Gilde.SchietScore.Persistence
         {
             services.AddTransient<ISchutterRepository, SchutterRepository>();
             services.AddTransient<ISchutterFactory, SchutterFactory>();
+            services.AddTransient<ISchutterBuilder, SchutterBuilder>();
+
             var connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             services.AddDbContext<SchietScoreDbContext>(options =>
                 options.UseNpgsql(connectionString));

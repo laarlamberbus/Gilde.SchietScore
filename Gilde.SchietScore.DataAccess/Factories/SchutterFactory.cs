@@ -6,6 +6,28 @@ namespace Gilde.SchietScore.Persistence.Factories
 {
     public class SchutterFactory : ISchutterFactory
     {
+        public LidDto CreateDto(Schutter model)
+        {
+            return new LidDto
+            {
+                Id = model.Id,
+                Naam = model.Naam,
+                KNTSNummer = model.KNTSNummer,
+                DeelnemerClassType = model.DeelnemerClassType.ToString(),
+                IsSchietendLid = true
+            };
+        }
+
+        public List<LidDto> CreateDtos(List<Schutter> models)
+        {
+            var leden = new List<LidDto>();
+            foreach (var m in models)
+            {
+                leden.Add(CreateDto(m));
+            }
+            return leden;
+        }
+
         public Schutter CreateModel(LidDto dto)
         {
             return new Schutter
