@@ -10,7 +10,7 @@ namespace Gilde.SchietScore.Persistence.Builders
         {
             toBuild.Naam = toBuildFrom.Naam;
             toBuild.IsSchietendLid = true;
-            toBuild.DeelnemerClassType = toBuildFrom.DeelnemerClassType.ToString();
+            toBuild.DeelnemerClassType = toBuildFrom.DeelnemerKlasseType.ToString();
             toBuild.KNTSNummer = toBuildFrom.KNTSNummer;
             return toBuild;
         }

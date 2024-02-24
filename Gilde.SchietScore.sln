@@ -13,15 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gilde.SchietScore.Persisten
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gilde.SchietScore.Application", "Gilde.SchietScore.Application\Gilde.SchietScore.Application.csproj", "{77BCB0C0-1F17-4CD4-8638-E20F06BD109A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. Domain", "00. Domain", "{BE56428E-F0B3-4682-BDDF-70BBA3BCE798}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.Domain", "00.Domain", "{BE56428E-F0B3-4682-BDDF-70BBA3BCE798}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10. Presentation", "10. Presentation", "{8A0CF343-E41B-4DF2-857F-48F1064F7BC3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10.Presentation", "10.Presentation", "{8A0CF343-E41B-4DF2-857F-48F1064F7BC3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20. Business", "20. Business", "{46D65853-4608-40F0-808D-F0C2A0AEFD5D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20.Business", "20.Business", "{46D65853-4608-40F0-808D-F0C2A0AEFD5D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "30. DataAccess", "30. DataAccess", "{9706181D-0809-4F08-882A-80F4D161EF82}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "30.DataAccess", "30.DataAccess", "{9706181D-0809-4F08-882A-80F4D161EF82}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. CompositionRoot", "00. CompositionRoot", "{FF77D8FB-5590-4E19-85E3-622F375CE75C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.CompositionRoot", "00.CompositionRoot", "{FF77D8FB-5590-4E19-85E3-622F375CE75C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gilde.SchietScore.CompositionRoot", "Gilde.SchietScore.CompositionRoot\Gilde.SchietScore.CompositionRoot.csproj", "{2671648E-D6F3-4DF1-BCFD-B54802698BEC}"
 EndProject

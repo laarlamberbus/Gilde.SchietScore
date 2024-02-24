@@ -1,7 +1,29 @@
 ﻿@page "/"
+@using Gilde.SchietScore.Domain.Enums
+@rendermode InteractiveServer
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Competitie</PageTitle>
 
-<h1>Hallo!</h1>
-
-Welkom bij je nieuwe app.
+@if(_huidigeCompetitie is null)
+{
+    <h1>Competitie starten</h1>
+    <p>Vul de onderstaande velden in om een nieuwe competitie te starten.</p>
+    <EditForm FormName="CompetitieForm" Model="_nieuweCompetitie" OnSubmit="@StartCompetitie">
+        <div style="display:flex; flex-direction:column; max-width: 550px;">
+            <label>Competitie type:</label>
+            <InputSelect @bind-Value="@_nieuweCompetitie.Name">
+                <option value="@CompetitieType.Zomer">@CompetitieType.Zomer</option>
+                <option value="@CompetitieType.Winter">@CompetitieType.Winter</option>
+            </InputSelect>
+            <label>Startdatum van de competitie:</label>
+            <InputDate @bind-Value="_nieuweCompetitie.StartDate"></InputDate>
+            <label>Einddatum van de competitie:</label>
+            <InputDate @bind-Value="_nieuweCompetitie.EndDate"></InputDate>
+            <input type="submit" value="Starten" class="btn btn-primary"/>
+        </div>
+    </EditForm>
+}
+@if (_huidigeCompetitie is not null)
+{
+    <h1>@_huidigeCompetitie.Name</h1>
+}

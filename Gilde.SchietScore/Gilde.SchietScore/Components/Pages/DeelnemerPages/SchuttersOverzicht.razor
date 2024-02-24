@@ -1,5 +1,6 @@
 ﻿@page "/schutters"
 @using Gilde.SchietScore.Domain
+@using Gilde.SchietScore.Domain.Enums
 @rendermode InteractiveServer
 @inject IJSRuntime JsRuntime
 
@@ -32,10 +33,10 @@
                             <td><InputText @bind-Value="_nieuweSchutter.Naam" placeholder="Vul naam in"></InputText></td>
                             <td><InputText @bind-Value="_nieuweSchutter.KNTSNummer" placeholder="Vul KNTSnummer in"></InputText></td>
                             <td>
-                                <InputSelect @bind-Value="_nieuweSchutter.DeelnemerClassType">
-                                    <option value="@DeelnemerClassType.A">@DeelnemerClassType.A</option>
-                                    <option value="@DeelnemerClassType.B">@DeelnemerClassType.B</option>
-                                    <option value="@DeelnemerClassType.C">@DeelnemerClassType.C</option>
+                                <InputSelect @bind-Value="_nieuweSchutter.DeelnemerKlasseType">
+                                    <option value="@DeelnemerKlasseType.A">@DeelnemerKlasseType.A</option>
+                                    <option value="@DeelnemerKlasseType.B">@DeelnemerKlasseType.B</option>
+                                    <option value="@DeelnemerKlasseType.C">@DeelnemerKlasseType.C</option>
                                 </InputSelect>
                             </td>
                             <td></td>
@@ -47,10 +48,10 @@
                                 <td><InputText @bind-Value="schutter.Naam" placeholder="Vul naam in"></InputText></td>
                                 <td><InputText @bind-Value="schutter.KNTSNummer" placeholder="Vul KNTSnummer in"></InputText></td>
                                 <td>
-                                    <InputSelect @bind-Value="schutter.DeelnemerClassType">
-                                        <option value="@DeelnemerClassType.A">@DeelnemerClassType.A</option>
-                                        <option value="@DeelnemerClassType.B">@DeelnemerClassType.B</option>
-                                        <option value="@DeelnemerClassType.C">@DeelnemerClassType.C</option>
+                                    <InputSelect @bind-Value="schutter.DeelnemerKlasseType">
+                                        <option value="@DeelnemerKlasseType.A">@DeelnemerKlasseType.A</option>
+                                        <option value="@DeelnemerKlasseType.B">@DeelnemerKlasseType.B</option>
+                                        <option value="@DeelnemerKlasseType.C">@DeelnemerKlasseType.C</option>
                                     </InputSelect>
                                 </td>
                                 <td><i @onclick="(() => DeleteSchutter(schutter))" class="bi bi-trash" style="color:#3D040A; cursor: pointer; font-size:20px;"></i></td>

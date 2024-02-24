@@ -1,4 +1,5 @@
 ﻿using Gilde.SchietScore.Domain;
+using Gilde.SchietScore.Domain.Enums;
 using Gilde.SchietScore.Persistence.Dtos;
 using Gilde.SchietScore.Persistence.Factories.Interfaces;
 
@@ -13,7 +14,7 @@ namespace Gilde.SchietScore.Persistence.Factories
                 Id = model.Id,
                 Naam = model.Naam,
                 KNTSNummer = model.KNTSNummer,
-                DeelnemerClassType = model.DeelnemerClassType.ToString(),
+                DeelnemerClassType = model.DeelnemerKlasseType.ToString(),
                 IsSchietendLid = true
             };
         }
@@ -35,7 +36,7 @@ namespace Gilde.SchietScore.Persistence.Factories
                 Id = dto.Id,
                 Naam = dto.Naam,
                 KNTSNummer = dto.KNTSNummer,
-                DeelnemerClassType = (DeelnemerClassType)Enum.Parse(typeof(DeelnemerClassType), dto.DeelnemerClassType),
+                DeelnemerKlasseType = (DeelnemerKlasseType)Enum.Parse(typeof(DeelnemerKlasseType), dto.DeelnemerClassType),
             };
         }
 

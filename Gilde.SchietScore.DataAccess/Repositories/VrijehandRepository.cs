@@ -1,5 +1,6 @@
 ﻿using Gilde.SchietScore.Application.Repositories;
 using Gilde.SchietScore.Domain;
+using Gilde.SchietScore.Domain.Enums;
 using Gilde.SchietScore.Persistence.Builders.Interfaces;
 using Gilde.SchietScore.Persistence.Dtos;
 using Gilde.SchietScore.Persistence.Factories.Interfaces;
@@ -48,7 +49,7 @@ namespace Gilde.SchietScore.Persistence.Repositories
                 {
                     Id = r.Id,
                     Naam = r.Deelnemer.Naam,
-                    DeelnemerClassType = (DeelnemerClassType)Enum.Parse(typeof(DeelnemerClassType), r.Deelnemer.DeelnemerClassType),
+                    DeelnemerKlasseType = (DeelnemerKlasseType)Enum.Parse(typeof(DeelnemerKlasseType), r.Deelnemer.DeelnemerClassType),
                     KNTSNummer = r.Deelnemer.KNTSNummer,
                     Score = r.Score
                 });

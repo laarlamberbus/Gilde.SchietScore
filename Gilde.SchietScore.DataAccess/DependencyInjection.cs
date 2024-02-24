@@ -20,6 +20,11 @@ namespace Gilde.SchietScore.Persistence
             services.AddTransient<ISchutterFactory, SchutterFactory>();
             services.AddTransient<ISchutterBuilder, SchutterBuilder>();
 
+            services.AddTransient<ICompetitieRepository, CompetitieRepository>();
+            services.AddTransient<ICompetitieFactory, CompetitieFactory>();
+
+            services.AddTransient<IWedstrijdFactory, WedstrijdFactory>();
+
             var connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             services.AddDbContext<SchietScoreDbContext>(options =>
                 options.UseNpgsql(connectionString));
