@@ -1,10 +1,13 @@
 ﻿@page "/"
+@using Gilde.SchietScore.Application.Repositories
 @using Gilde.SchietScore.Domain.Enums
+@using MediatR
 @rendermode InteractiveServer
+@inherits CompetitieBase
 
 <PageTitle>Competitie</PageTitle>
 
-@if(_huidigeCompetitie is null)
+@if(HuidigeCompetitie == null)
 {
     <h1>Competitie starten</h1>
     <p>Vul de onderstaande velden in om een nieuwe competitie te starten.</p>
@@ -22,8 +25,22 @@
             <input type="submit" value="Starten" class="btn btn-primary"/>
         </div>
     </EditForm>
+    
 }
-@if (_huidigeCompetitie is not null)
+@if (HuidigeCompetitie != null)
 {
-    <h1>@_huidigeCompetitie.Name</h1>
+    <div style="display:flex; flex-direction:column; max-width: 550px;">
+        <h1>@HuidigeCompetitie.Name</h1>
+        <div style ="display:flex; flex-direction:row; justify-content:space-between; max-width: 550px;">
+            <div>
+                <label><b>Begonnen op:</b></label>
+                <p>@HuidigeCompetitie.StartDate</p>
+            </div>
+            <div>
+                <label><b>Eindigt op:</b></label>
+                <p>@HuidigeCompetitie.StartDate</p>
+            </div>
+        </div>
+        <button class="btn btn-primary" @onclick="CompetitieAfronden">Competitie afronden</button>
+    </div>
 }

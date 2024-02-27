@@ -6,7 +6,9 @@ namespace Gilde.SchietScore.Persistence.Factories.Interfaces
 {
     public interface ICompetitieFactory : 
         ICreateModel<Competitie, CompetitieDto>,
-        ICreateDto<CompetitieDto, Competitie>
+        ICreateDto<CompetitieDto, Competitie>,
+        ICreateDto<CompetitieDto, Zomer>,
+        ICreateDto<CompetitieDto, Winter>
     {
     }
 }

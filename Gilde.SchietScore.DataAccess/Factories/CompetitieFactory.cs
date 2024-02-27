@@ -7,15 +7,56 @@ namespace Gilde.SchietScore.Persistence.Factories
 {
     public class CompetitieFactory : ICompetitieFactory
     {
-        public CompetitieDto CreateDto(Competitie model)
+        private readonly IWedstrijdFactory _wedstrijdFactory;
+        public CompetitieFactory(IWedstrijdFactory wedstrijdFactory)
         {
+            _wedstrijdFactory = wedstrijdFactory;
+        }
+
+        public CompetitieDto CreateDto(Zomer model)
+        {
+            List<WedstrijdDto> wedstrijden = new List<WedstrijdDto>();
+            wedstrijden.Add(_wedstrijdFactory.CreateVrijehandDto(model.Vrijehand));
+            wedstrijden.Add(_wedstrijdFactory.CreateOpgelegdDto(model.Opgelegd));
+
             return new CompetitieDto
             {
                 Name = model.Name,
                 StartDatum = model.StartDate,
                 EndDatum = model.EndDate,
-                IsActive = model.IsActive
+                IsActive = model.IsActive,
+                Wedstrijden = wedstrijden
             };
+        }
+
+        public CompetitieDto CreateDto(Winter model)
+        {
+            List<WedstrijdDto> wedstrijden = new List<WedstrijdDto>();
+            wedstrijden.Add(_wedstrijdFactory.CreateVrijehandDto(model.Vrijehand));
+            wedstrijden.Add(_wedstrijdFactory.CreateOpgelegdDto(model.Opgelegd));
+            wedstrijden.Add(_wedstrijdFactory.CreateLooijmansDto(model.LooijmansBeker));
+
+            return new CompetitieDto
+            {
+                Name = model.Name,
+                StartDatum = model.StartDate,
+                EndDatum = model.EndDate,
+                IsActive = model.IsActive,
+                Wedstrijden = wedstrijden
+            };
+        }
+
+        public CompetitieDto CreateDto(Competitie model)
+        {
+            if(model.GetType().Name == CompetitieType.Zomer.ToString())
+            {
+                return CreateDto((Zomer)model);
+            }
+            else if(model.GetType().Name == CompetitieType.Winter.ToString())
+            {
+                return CreateDto((Winter)model);
+            }
+            return null;
         }
 
         public Competitie CreateModel(CompetitieDto dto)
@@ -27,6 +68,7 @@ namespace Gilde.SchietScore.Persistence.Factories
             {
                 return new Zomer
                 {
+                    Id = dto.Id,
                     Name = dto.Name,
                     StartDate = dto.StartDatum,
                     EndDate = dto.EndDatum
@@ -36,6 +78,7 @@ namespace Gilde.SchietScore.Persistence.Factories
             {
                 return new Winter
                 {
+                    Id = dto.Id,
                     Name = dto.Name,
                     StartDate = dto.StartDatum,
                     EndDate= dto.EndDatum

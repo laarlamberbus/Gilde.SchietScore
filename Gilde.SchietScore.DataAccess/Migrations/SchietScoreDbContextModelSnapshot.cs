@@ -109,7 +109,7 @@ namespace Gilde.SchietScore.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Competities");
+                    b.ToTable("Competities", (string)null);
                 });
 
             modelBuilder.Entity("Gilde.SchietScore.Persistence.Dtos.KorpsDto", b =>
@@ -134,7 +134,7 @@ namespace Gilde.SchietScore.Persistence.Migrations
 
                     b.HasIndex("CompetitieId");
 
-                    b.ToTable("Korpsen");
+                    b.ToTable("Korpsen", (string)null);
                 });
 
             modelBuilder.Entity("Gilde.SchietScore.Persistence.Dtos.LidDto", b =>
@@ -165,7 +165,7 @@ namespace Gilde.SchietScore.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Leden");
+                    b.ToTable("Leden", (string)null);
                 });
 
             modelBuilder.Entity("Gilde.SchietScore.Persistence.Dtos.ResultaatDto", b =>
@@ -194,7 +194,7 @@ namespace Gilde.SchietScore.Persistence.Migrations
 
                     b.HasIndex("WedstrijdId");
 
-                    b.ToTable("Resultaten");
+                    b.ToTable("Resultaten", (string)null);
                 });
 
             modelBuilder.Entity("Gilde.SchietScore.Persistence.Dtos.WedstrijdDto", b =>
@@ -222,7 +222,7 @@ namespace Gilde.SchietScore.Persistence.Migrations
 
                     b.HasIndex("CompetitieDtoId");
 
-                    b.ToTable("Wedstrijden");
+                    b.ToTable("Wedstrijden", (string)null);
                 });
 
             modelBuilder.Entity("KorpsDtoLidDto", b =>
@@ -237,7 +237,7 @@ namespace Gilde.SchietScore.Persistence.Migrations
 
                     b.HasIndex("LedenId");
 
-                    b.ToTable("KorpsDtoLidDto");
+                    b.ToTable("KorpsDtoLidDto", (string)null);
                 });
 
             modelBuilder.Entity("LidDtoWedstrijdDto", b =>
@@ -252,7 +252,7 @@ namespace Gilde.SchietScore.Persistence.Migrations
 
                     b.HasIndex("WedstrijdenId");
 
-                    b.ToTable("LidDtoWedstrijdDto");
+                    b.ToTable("LidDtoWedstrijdDto", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

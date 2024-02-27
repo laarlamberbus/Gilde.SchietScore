@@ -1,4 +1,4 @@
-﻿using Gilde.SchietScore.Application.Repositories;
+﻿using Gilde.SchietScore.Application.Competitions.Commands;
 using Gilde.SchietScore.Domain;
 using Gilde.SchietScore.Domain.Enums;
 using Microsoft.AspNetCore.Components;
@@ -7,9 +7,6 @@ namespace Gilde.SchietScore.Components.Pages
 {
     public partial class Home
     {
-        [Inject]
-        private ICompetitieRepository _competitieRepository { get; set; }
-        private Competitie _huidigeCompetitie;
         private Competitie _nieuweCompetitie = new Zomer
         {
             Name = CompetitieType.Zomer.ToString(),
@@ -17,16 +14,16 @@ namespace Gilde.SchietScore.Components.Pages
             EndDate = DateOnly.FromDateTime(DateTime.Today).AddMonths(6),
         };
 
-        protected async override void OnInitialized()
-        {
-            _huidigeCompetitie = await _competitieRepository.GetHuidigeCompetitie();
-        }
         private async Task StartCompetitie()
         {
-            if (_nieuweCompetitie.Name.Contains(CompetitieType.Winter.ToString()))
-            {
-                
-            }
+            await Mediator.Send(new StartCompetitionCommand(_nieuweCompetitie));
+            NavigationManager.NavigateTo("", true);
+        }
+        private async Task CompetitieAfronden()
+        {
+            await CompetitieRepository.HuidigeCompetitieAfronden(HuidigeCompetitie);
+            await CompetitieRepository.SaveChanges();
+            NavigationManager.NavigateTo("", true);
         }
     }
 }

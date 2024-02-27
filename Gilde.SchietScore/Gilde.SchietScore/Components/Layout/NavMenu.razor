@@ -1,6 +1,7 @@
-﻿@implements IDisposable
-
+﻿@using Gilde.SchietScore.Domain.Enums
+@implements IDisposable
 @inject NavigationManager NavigationManager
+@inherits CompetitieBase
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -19,28 +20,26 @@
                         <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Schutters
                     </NavLink>
                 </div>
-                @if(_huidigeCompetitie != null)
+                @if(HuidigeCompetitie != null)
                 {
                     <div class="nav-item px-3">
                         <NavLink class="nav-link" href="vrijehand">
                             <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Vrijehand resultaten
                         </NavLink>
                     </div>
-                @* <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="uitslagen">
-                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Uitslagen
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="uitslagen-toevoegen">
-                        <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Uitslagen toevoegen
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="uitslagen-wijzigen">
-                        <span class="bi bi-pen-nav-menu" aria-hidden="true"></span> Uitslagen wijzigen
-                    </NavLink>
-                </div>   *@      
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="opgelegd">
+                            <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Opgelegd resultaten
+                        </NavLink>
+                    </div>
+                    @if(HuidigeCompetitie.GetType().Name == CompetitieType.Winter.ToString())
+                    {
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="looijmans">
+                                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Looijmans resultaten
+                            </NavLink>
+                        </div>     
+                    }
                 }
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="Account/Manage">

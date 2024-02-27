@@ -27,7 +27,12 @@ namespace Gilde.SchietScore.Persistence
 
             var connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             services.AddDbContext<SchietScoreDbContext>(options =>
-                options.UseNpgsql(connectionString));
+            {
+                options.UseNpgsql(connectionString, builder =>
+                {
+                    builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+                });
+            });
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddIdentityCore<SchietScoreUser>(options => options.SignIn.RequireConfirmedAccount = true)

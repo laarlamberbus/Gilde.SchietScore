@@ -25,7 +25,14 @@ namespace Gilde.SchietScore.Persistence.Repositories
 
         public async Task<Competitie> GetHuidigeCompetitie()
         {
-            return _competitieFactory.CreateModel(await _schietScoreDbContext.Competities.SingleOrDefaultAsync(c => c.IsActive && c.StartDatum.Year ==  DateTime.Now.Year));
+            var huidigeCompetitie = await _schietScoreDbContext.Competities.SingleOrDefaultAsync(c => c.IsActive && c.StartDatum.Year == DateTime.Now.Year);
+            return _competitieFactory.CreateModel(huidigeCompetitie);
+        }
+
+        public async Task HuidigeCompetitieAfronden(Competitie competitie)
+        {
+            var competitieDto = await _schietScoreDbContext.Competities.FindAsync(competitie.Id);
+            competitieDto.IsActive = false;
         }
 
         public async Task SaveChanges(CancellationToken cancellationToken = default)

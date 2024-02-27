@@ -10,4 +10,12 @@
     <ProjectReference Include="..\Gilde.SchietScore.Models\Gilde.SchietScore.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Competitions\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
 </Project>
