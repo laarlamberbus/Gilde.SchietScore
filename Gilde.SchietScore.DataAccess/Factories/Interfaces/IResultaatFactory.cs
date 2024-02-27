@@ -4,10 +4,9 @@ using Gilde.SchietScore.Persistence.Factories.Interfaces.Internals;
 
 namespace Gilde.SchietScore.Persistence.Factories.Interfaces
 {
-    public interface IVrijehandFactory : 
-        ICreateModel<Vrijehand, WedstrijdDto>,
-        ICreateModels<Vrijehand, WedstrijdDto>,
-        ICreateDto<WedstrijdDto, Vrijehand>
-    {
+    public interface IResultaatFactory : 
+        ICreateDto<List<ResultaatDto>, Vrijehand>,
+        ICreateModel<Vrijehand, List<ResultaatDto>>
+    { 
     }
 }

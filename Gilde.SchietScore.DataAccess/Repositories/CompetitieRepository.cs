@@ -20,12 +20,13 @@ namespace Gilde.SchietScore.Persistence.Repositories
 
         public async Task Create(Competitie entity, CancellationToken cancellationToken = default)
         {
-            await _schietScoreDbContext.Competities.AddAsync(_competitieFactory.CreateDto(entity));
+            var comp = _competitieFactory.CreateDto(entity);
+            await _schietScoreDbContext.Competities.AddAsync(comp);
         }
 
-        public async Task<Competitie> GetHuidigeCompetitie()
+        public async Task<Competitie> GetHuidigeCompetitie(CancellationToken cancellationToken = default)
         {
-            var huidigeCompetitie = await _schietScoreDbContext.Competities.SingleOrDefaultAsync(c => c.IsActive && c.StartDatum.Year == DateTime.Now.Year);
+            var huidigeCompetitie = await _schietScoreDbContext.Competities.SingleOrDefaultAsync(c => c.IsActive && c.StartDatum.Year == DateTime.Now.Year, cancellationToken);
             return _competitieFactory.CreateModel(huidigeCompetitie);
         }
 

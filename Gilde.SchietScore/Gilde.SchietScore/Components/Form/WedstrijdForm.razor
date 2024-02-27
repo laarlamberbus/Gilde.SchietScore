@@ -1,0 +1,45 @@
+﻿<div style="display:flex; justify-content:space-between;">
+    <div>
+        <h1>@Title</h1>
+    </div>
+    <div style="display: flex; justify-content: flex-end;">
+        <div style="margin-left: 15px;">
+            <label>Datum van wedstrijddag:</label>
+            <br />
+            <InputDate @bind-Value="Model.StartDatum" @bind-Value:format="dd/MM/yyyy"></InputDate>
+        </div>
+    </div>
+</div>
+<EditForm FormName="@FormName" Model="@Model" OnSubmit="@OnFormSubmit">
+    <div class="tableFixHeadLarge">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>KNTS</th>
+                    <th>Klasse</th>
+                    <th>Score</th>
+                    <th>Aantal kogels</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @if (Model.Deelnemers != null)
+                    {
+                        @foreach (var deelnemer in Model.Deelnemers)
+                        {
+                            <th>@deelnemer.Naam</th>
+                            <th>@deelnemer.KNTSNummer</th>
+                            <th>@deelnemer.DeelnemerKlasseType</th>
+                            <th><InputNumber @bind-Value="deelnemer.Score"></InputNumber></th>
+                            <th><InputNumber @bind-Value="deelnemer.AantalKogels"></InputNumber></th>
+                        }
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container-btn-save">
+        <input type="submit" value="Opslaan" class="btn btn-primary" />
+    </div>
+</EditForm>

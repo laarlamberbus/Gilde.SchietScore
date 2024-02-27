@@ -8,6 +8,7 @@ namespace Gilde.SchietScore.Persistence.Factories
     public class CompetitieFactory : ICompetitieFactory
     {
         private readonly IWedstrijdFactory _wedstrijdFactory;
+
         public CompetitieFactory(IWedstrijdFactory wedstrijdFactory)
         {
             _wedstrijdFactory = wedstrijdFactory;
@@ -15,7 +16,7 @@ namespace Gilde.SchietScore.Persistence.Factories
 
         public CompetitieDto CreateDto(Zomer model)
         {
-            List<WedstrijdDto> wedstrijden = new List<WedstrijdDto>();
+            var wedstrijden = new List<WedstrijdDto>();
             wedstrijden.Add(_wedstrijdFactory.CreateVrijehandDto(model.Vrijehand));
             wedstrijden.Add(_wedstrijdFactory.CreateOpgelegdDto(model.Opgelegd));
 
@@ -31,7 +32,7 @@ namespace Gilde.SchietScore.Persistence.Factories
 
         public CompetitieDto CreateDto(Winter model)
         {
-            List<WedstrijdDto> wedstrijden = new List<WedstrijdDto>();
+            var wedstrijden = new List<WedstrijdDto>();
             wedstrijden.Add(_wedstrijdFactory.CreateVrijehandDto(model.Vrijehand));
             wedstrijden.Add(_wedstrijdFactory.CreateOpgelegdDto(model.Opgelegd));
             wedstrijden.Add(_wedstrijdFactory.CreateLooijmansDto(model.LooijmansBeker));

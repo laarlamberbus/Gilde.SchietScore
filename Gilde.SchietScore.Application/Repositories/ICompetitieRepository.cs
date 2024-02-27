@@ -5,7 +5,7 @@ namespace Gilde.SchietScore.Application.Repositories
 {
     public interface ICompetitieRepository : ICreate<Competitie>, ISave
     {
-        public Task<Competitie> GetHuidigeCompetitie();
+        public Task<Competitie> GetHuidigeCompetitie(CancellationToken cancellationToken = default);
         public Task HuidigeCompetitieAfronden(Competitie competitie);
     }
 }

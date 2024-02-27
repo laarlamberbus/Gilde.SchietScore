@@ -8,7 +8,14 @@ namespace Gilde.SchietScore.Persistence.Factories
     {
         public WedstrijdDto CreateDto(Vrijehand model)
         {
-            throw new NotImplementedException();
+            var dto = new WedstrijdDto
+            {
+                Naam = $"{nameof(Vrijehand)} {model.StartDatum.Year}",
+                StartDatum = model.StartDatum,
+                EindDatum = model.EindDatum
+            };
+
+            return dto;
         }
 
         public List<WedstrijdDto> CreateDtos(List<Vrijehand> models)

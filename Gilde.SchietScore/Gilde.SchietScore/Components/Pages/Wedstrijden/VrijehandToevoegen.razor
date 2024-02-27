@@ -1,0 +1,19 @@
+﻿@page "/vrijehand-toevoegen"
+@using Gilde.SchietScore.Domain
+@using Gilde.SchietScore.Domain.Enums
+@rendermode InteractiveServer
+@inject IJSRuntime JsRuntime
+@inherits WedstrijdBase
+
+<PageTitle>Vrijehand resultaten</PageTitle>
+<AuthorizeView Context="VrijehandAuthorization">
+    
+    @if (vrijehandResultaten != null)
+    {
+        <Gilde.SchietScore.Components.Form.WedstrijdForm FormName="VrijehandForm" Title="Vrijehand resultaten toevoegen" Model="@vrijehandResultaten" OnModelChanged="@SubmitVrijehadForm"></Gilde.SchietScore.Components.Form.WedstrijdForm>
+    }
+    else
+    {
+        <p>Dit is een overzicht van alle resultaten vrijehand</p>
+    }
+</AuthorizeView>

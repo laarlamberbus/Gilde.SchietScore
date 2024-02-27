@@ -3,12 +3,12 @@ using Gilde.SchietScore.Domain;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace Gilde.SchietScore.Components.Pages.DeelnemerPages
+namespace Gilde.SchietScore.Components.Pages.Schutters
 {
     public partial class SchuttersOverzicht
     {
         [Inject]
-        private IJSRuntime _jsRuntime {  get; set; }
+        private IJSRuntime _jsRuntime { get; set; }
         [Inject]
         private NavigationManager _navigationManager { get; set; }
         [Inject]

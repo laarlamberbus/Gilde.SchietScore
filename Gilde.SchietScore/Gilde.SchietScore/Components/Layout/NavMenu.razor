@@ -1,6 +1,5 @@
 ﻿@using Gilde.SchietScore.Domain.Enums
 @implements IDisposable
-@inject NavigationManager NavigationManager
 @inherits CompetitieBase
 
 <div class="top-row ps-3 navbar navbar-dark">
@@ -24,21 +23,21 @@
                 {
                     <div class="nav-item px-3">
                         <NavLink class="nav-link" href="vrijehand">
-                            <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Vrijehand resultaten
+                            <span class="custom-bi bi-circle" aria-hidden="true"></span> Vrijehand resultaten
                         </NavLink>
                     </div>
                     <div class="nav-item px-3">
                         <NavLink class="nav-link" href="opgelegd">
-                            <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Opgelegd resultaten
+                            <span class="custom-bi bi-align-top" aria-hidden="true"></span> Opgelegd resultaten
                         </NavLink>
                     </div>
                     @if(HuidigeCompetitie.GetType().Name == CompetitieType.Winter.ToString())
                     {
                         <div class="nav-item px-3">
                             <NavLink class="nav-link" href="looijmans">
-                                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Looijmans resultaten
+                                <span class="custom-bi bi-trophy" aria-hidden="true"></span> Looijmans resultaten
                             </NavLink>
-                        </div>     
+                        </div>
                     }
                 }
                 <div class="nav-item px-3">

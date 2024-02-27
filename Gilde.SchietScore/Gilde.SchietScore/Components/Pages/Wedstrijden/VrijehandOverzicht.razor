@@ -1,0 +1,54 @@
+﻿@page "/vrijehand"
+@using Gilde.SchietScore.Domain
+@using Gilde.SchietScore.Domain.Enums
+@rendermode InteractiveServer
+@inject IJSRuntime JsRuntime
+@inherits WedstrijdBase
+
+<PageTitle>Vrijehand resultaten</PageTitle>
+<AuthorizeView Context="VrijehandAuthorization">
+    <div style="display:flex; justify-content:space-between;">
+        <div>
+            <h1>Vrijehand resultaten @geselecteerdeWedstrijdWeek.ToString("dd-MM-yyyy")</h1>
+        </div>
+        
+        <div style="display: flex; flex-direction: column;">
+
+            <div style="display: flex; justify-content: flex-end;">
+                <div style="margin-left: 15px;">
+                    <label>Selecteer week:</label>
+                    <br />
+                    <select><option>07-01-2024</option></select>
+                    @* <InputSelect DisplayName="week-selection" class="form-select" multiple aria-label="multiple select example" @bind-Value="geselecteerdewedstrijdWeek" @oninput="LaadResultatenVanWeek">
+                        @foreach(var week in _wedstrijdWeken)
+                        {
+                            <option value="@week">@week</option> 
+                        }
+                    </InputSelect> *@
+                </div>
+                <div style="margin-left: 15px;">
+                    <label>Selecteer jaar:</label>
+                    <br />
+                    <select><option>2024</option></select>
+                    @*< InputSelect DisplayName="jaar-selection" class="form-select" multiple aria-label="multiple select example" @bind-Value="_geselecteerdWedstrijdJaar" @oninput="LaadResultatenVanJaar">
+                        @foreach(var jaar in _wedstrijdJaren)
+                        {
+                            <option value="@jaar">@jaar</option>
+                        }
+                    </InputSelect> *@
+                </div>
+                <div style="margin-left: 15px;">
+                    <button class="btn btn-primary" @onclick='() => NavigationManager.NavigateTo("vrijehand-toevoegen")'><i class="bi bi-plus-square" style="font-size:25px"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (vrijehandResultaten != null)
+    {
+        <Gilde.SchietScore.Components.Form.WedstrijdForm FormName="VrijehandForm" Model="@vrijehandResultaten" OnModelChanged="@SubmitVrijehadForm"></Gilde.SchietScore.Components.Form.WedstrijdForm>
+    }
+    else
+    {
+        <p>Dit is een overzicht van alle resultaten vrijehand</p>
+    }
+</AuthorizeView>

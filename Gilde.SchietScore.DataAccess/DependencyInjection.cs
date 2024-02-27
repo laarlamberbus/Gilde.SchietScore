@@ -16,6 +16,10 @@ namespace Gilde.SchietScore.Persistence
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddTransient<IVrijehandRepository, VrijehandRepository>();
+            services.AddTransient<IVrijehandFactory, VrijehandFactory>();
+            services.AddTransient<IVrijehandBuilder, VrijehandBuilder>();
+
             services.AddTransient<ISchutterRepository, SchutterRepository>();
             services.AddTransient<ISchutterFactory, SchutterFactory>();
             services.AddTransient<ISchutterBuilder, SchutterBuilder>();
@@ -24,6 +28,9 @@ namespace Gilde.SchietScore.Persistence
             services.AddTransient<ICompetitieFactory, CompetitieFactory>();
 
             services.AddTransient<IWedstrijdFactory, WedstrijdFactory>();
+
+            services.AddTransient<IResultaatRepository, ResultaatRepository>();
+            services.AddTransient<IResultaatFactory, ResultaatFactory>();
 
             var connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             services.AddDbContext<SchietScoreDbContext>(options =>

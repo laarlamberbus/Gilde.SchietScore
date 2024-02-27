@@ -3,7 +3,8 @@
     public abstract class Wedstrijd
     {
         public int Id { get; set; }
-        public DateOnly Datum { get; set; }
-        public List<Deelnemer> Deelnemers { get; set; }
+        public DateOnly StartDatum { get; set; }
+        public DateOnly EindDatum { get; set; }
+        public List<Schutter> Deelnemers { get; set; }
     }
 }

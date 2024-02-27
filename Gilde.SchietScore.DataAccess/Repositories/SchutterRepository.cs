@@ -1,5 +1,4 @@
 ﻿using Gilde.SchietScore.Application.Repositories;
-using Gilde.SchietScore.Application.Repositories.Internals;
 using Gilde.SchietScore.Domain;
 using Gilde.SchietScore.Persistence.Builders.Interfaces;
 using Gilde.SchietScore.Persistence.Factories.Interfaces;
@@ -30,7 +29,7 @@ namespace Gilde.SchietScore.Persistence.Repositories
 
         public async Task<IEnumerable<Schutter>> ReadAll(CancellationToken cancellationToken = default)
         {
-            return _schutterFactory.CreateModels(await _schietScoreDbContext.Leden.ToListAsync(cancellationToken));
+            return _schutterFactory.CreateModels(await _schietScoreDbContext.Leden.Where(l => l.IsSchietendLid).ToListAsync(cancellationToken));
         }
 
         public async Task Update(IEnumerable<Schutter> entities, CancellationToken cancellationToken = default)

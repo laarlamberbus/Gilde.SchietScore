@@ -6,11 +6,20 @@ namespace Gilde.SchietScore.Persistence.Factories
 {
     public class WedstrijdFactory : IWedstrijdFactory
     {
+        private SchutterFactory _schutterFactory;
+
+        public WedstrijdFactory(SchutterFactory schutterFactory) 
+        { 
+            _schutterFactory = schutterFactory;
+        }
+
         public Opgelegd CreateOpgelegdModel(WedstrijdDto dto)
         {
             return new Opgelegd
             {
-
+                StartDatum = dto.StartDatum,
+                EindDatum = dto.EindDatum,
+                Deelnemers = _schutterFactory.CreateModels(dto.Deelnemers)
             };
         }
 
@@ -18,7 +27,9 @@ namespace Gilde.SchietScore.Persistence.Factories
         {
             return new Vrijehand
             {
-
+                StartDatum = dto.StartDatum,
+                EindDatum = dto.EindDatum,
+                Deelnemers = _schutterFactory.CreateModels(dto.Deelnemers)
             };
         }
 
@@ -26,7 +37,9 @@ namespace Gilde.SchietScore.Persistence.Factories
         {
             return new Looijmans
             {
-
+                StartDatum = dto.StartDatum,
+                EindDatum = dto.EindDatum,
+                Deelnemers = _schutterFactory.CreateModels(dto.Deelnemers)
             };
         }
 
@@ -34,8 +47,9 @@ namespace Gilde.SchietScore.Persistence.Factories
         {
             return new WedstrijdDto
             {
-                Naam = $"{nameof(Opgelegd)} {model.Datum.ToString("dd-MM-yyyy")}",
-                
+                Naam = nameof(Opgelegd),
+                StartDatum = model.StartDatum,
+                EindDatum = model.EindDatum
             };
         }
 
@@ -43,8 +57,9 @@ namespace Gilde.SchietScore.Persistence.Factories
         {
             return new WedstrijdDto
             {
-                Naam = $"{nameof(Vrijehand)} {model.Datum.ToString("dd-MM-yyyy")}",
-
+                Naam = nameof(Vrijehand),
+                StartDatum = model.StartDatum,
+                EindDatum = model.EindDatum
             };
         }
 
@@ -52,8 +67,9 @@ namespace Gilde.SchietScore.Persistence.Factories
         {
             return new WedstrijdDto
             {
-                Naam = $"{nameof(Looijmans)} {model.Datum.ToString("dd-MM-yyyy")}",
-
+                Naam = nameof(Looijmans),
+                StartDatum = model.StartDatum,
+                EindDatum = model.EindDatum
             };
         }
     }

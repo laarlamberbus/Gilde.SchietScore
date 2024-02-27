@@ -8,14 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Components\Pages\Scores\VrijehandOverzicht.razor.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Components\Pages\Scores\VrijehandOverzicht.razor.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Gilde.SchietScore.Application\Gilde.SchietScore.Application.csproj" />
     <ProjectReference Include="..\..\Gilde.SchietScore.CompositionRoot\Gilde.SchietScore.CompositionRoot.csproj" />
     <ProjectReference Include="..\..\Gilde.SchietScore.Models\Gilde.SchietScore.Domain.csproj" />

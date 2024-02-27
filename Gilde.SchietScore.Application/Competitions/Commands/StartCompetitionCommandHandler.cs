@@ -18,15 +18,18 @@ namespace Gilde.SchietScore.Application.Competitions.Commands
         {
             var vrijehand = new Vrijehand
             {
-                Datum = DateOnly.FromDateTime(DateTime.Now)
+                StartDatum = request.Competition.StartDate,
+                EindDatum = request.Competition.EndDate
             };
             var looijmans = new Looijmans
             {
-                Datum = DateOnly.FromDateTime(DateTime.Now)
+                StartDatum = request.Competition.StartDate,
+                EindDatum = request.Competition.EndDate
             };
             var opgelegd = new Opgelegd
             {
-                Datum = DateOnly.FromDateTime(DateTime.Now)
+                StartDatum = request.Competition.StartDate,
+                EindDatum = request.Competition.EndDate
             };
 
             if (request.Competition.Name.Contains(CompetitieType.Winter.ToString()))
