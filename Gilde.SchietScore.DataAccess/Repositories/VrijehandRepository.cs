@@ -29,12 +29,15 @@ namespace Gilde.SchietScore.Persistence.Repositories
             await _schietScoreDbContext.Wedstrijden.AddAsync(_vrijehandFactory.CreateDto(entity), cancellationToken);
         }
 
-        public async Task<Vrijehand> ReadByDate(DateOnly dateOnly, CancellationToken cancellationToken = default)
+        public async Task<Vrijehand> ReadWedstrijddag(DeelnemerKlasse deelnemerKlasse, DateOnly dateOnly, CancellationToken cancellationToken = default)
         {
             var result = await _schietScoreDbContext
                                     .Resultaten.Where(s => 
-                                        s.Datum == dateOnly && 
+                                        s.Datum == dateOnly &&
+                                        s.Deelnemer.Klasse == deelnemerKlasse.ToString() &&
                                         EF.Functions.Like(s.Wedstrijd.Naam, $"%{nameof(Vrijehand)}%"))
+                                    .Include(s => s.Deelnemer)
+                                    .Include(s => s.Wedstrijd)
                                     .ToListAsync();
 
             var leden = new List<LidDto>();
@@ -48,7 +51,7 @@ namespace Gilde.SchietScore.Persistence.Repositories
                 {
                     Id = r.Id,
                     Naam = r.Deelnemer.Naam,
-                    DeelnemerClassType = (DeelnemerClassType)Enum.Parse(typeof(DeelnemerClassType), r.Deelnemer.DeelnemerClassType),
+                    Klasse = (DeelnemerKlasse)Enum.Parse(typeof(DeelnemerKlasse), r.Deelnemer.Klasse),
                     KNTSNummer = r.Deelnemer.KNTSNummer,
                     Score = r.Score
                 });
@@ -90,6 +93,32 @@ namespace Gilde.SchietScore.Persistence.Repositories
         public async Task<Vrijehand> ReadById(int id, CancellationToken cancellationToken = default)
         {
             return _vrijehandFactory.CreateModel(await _schietScoreDbContext.Wedstrijden.FindAsync(id, cancellationToken));
+        }
+
+        public async Task<List<DateOnly>> ReadAlleWedstrijdagenPerJaar(int jaar, CancellationToken cancellationToken = default)
+        {
+            return await _schietScoreDbContext.Resultaten
+                            .Where(r => r.Datum.Year == jaar)
+                            .Select(r => r.Datum)
+                            .Distinct()
+                            .OrderBy(d => d)
+                            .ToListAsync(cancellationToken);
+        }
+
+        public async Task<List<int>> ReadAlleWedstrijdJaren(CancellationToken cancellationToken = default)
+        {
+            return await _schietScoreDbContext.Resultaten
+                             .Select(r => r.Datum.Year)
+                             .Distinct()
+                             .OrderBy(d => d)
+                             .ToListAsync(cancellationToken);
+        }
+
+        public async Task RegisterNewResultaatVrijehand(Schutter schutter, DateOnly wedstrijddag, CancellationToken cancellationToken = default)
+        {
+            var wedstrijdID = _schietScoreDbContext.Wedstrijden.Single(w => EF.Functions.Like(w.Naam, $"%{nameof(Vrijehand)} {schutter.Klasse}%")).Id;
+
+            await _schietScoreDbContext.Resultaten.AddAsync(new ResultaatDto { DeelnemerId = schutter.Id, WedstrijdId = wedstrijdID, Datum = wedstrijddag, Score = schutter.Score, AantalKogels = schutter.AantalKogels }, cancellationToken);
         }
     }
 }

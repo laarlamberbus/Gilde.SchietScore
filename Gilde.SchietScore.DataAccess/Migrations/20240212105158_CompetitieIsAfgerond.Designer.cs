@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Gilde.SchietScore.Persistence.Migrations
 {
     [DbContext(typeof(SchietScoreDbContext))]
-    [Migration("20240209230347_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240212105158_CompetitieIsAfgerond")]
+    partial class CompetitieIsAfgerond
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,6 +100,9 @@ namespace Gilde.SchietScore.Persistence.Migrations
                     b.Property<DateOnly>("EndDatum")
                         .HasColumnType("date");
 
+                    b.Property<bool>("IsAfgerond")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -145,14 +148,14 @@ namespace Gilde.SchietScore.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("DeelnemerClassType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<bool>("IsSchietendLid")
                         .HasColumnType("boolean");
 
                     b.Property<string>("KNTSNummer")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Klasse")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -175,6 +178,12 @@ namespace Gilde.SchietScore.Persistence.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AantalKogels")
+                        .HasColumnType("integer");
+
+                    b.Property<DateOnly>("Datum")
+                        .HasColumnType("date");
 
                     b.Property<int>("DeelnemerId")
                         .HasColumnType("integer");
@@ -202,9 +211,15 @@ namespace Gilde.SchietScore.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<DateOnly>("EindDatum")
+                        .HasColumnType("date");
+
                     b.Property<string>("Naam")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateOnly>("StartDatum")
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 

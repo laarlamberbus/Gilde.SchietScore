@@ -6,7 +6,7 @@
         public string Naam { get; set; }
         public string KNTSNummer { get; set; }
         public bool IsSchietendLid { get; set; }
-        public string DeelnemerClassType { get; set; }
+        public string Klasse { get; set; }
         public bool SoftDeleted { get; set; }
         public List<WedstrijdDto> Wedstrijden { get; set; }
         public List<KorpsDto> Korpsen { get; set; }

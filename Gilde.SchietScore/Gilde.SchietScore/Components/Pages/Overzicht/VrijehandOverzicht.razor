@@ -1,0 +1,81 @@
+﻿@page "/vrijehand"
+@using Gilde.SchietScore.Domain
+@rendermode InteractiveServer
+@inject IJSRuntime JsRuntime
+
+<PageTitle>Vrijehand @_deelnemerKlasse resultaten</PageTitle>
+<AuthorizeView Context="VrijehandAuthorization">
+    @if (_vrijehandResultaten == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div style="display:flex; justify-content:space-between;">
+            <div>
+                <h1>Vrijehand @_deelnemerKlasse resultaten @_geselecteerdeWedstrijddag.ToString("dd-MM-yyyy")</h1>
+
+                <p>Dit is een overzicht van alle resultaten vrijehand</p>
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+                <div style="margin-left: 15px;">
+                    <label>Selecteer klasse</label>
+                    <InputSelect DisplayName="klasse-selection" class="form-select" multiple aria-label="multiple select example" @bind-Value="_deelnemerKlasse" @oninput="LaadResultatenVanKlasse">
+                        <option value="@DeelnemerKlasse.A">A</option>
+                        <option value="@DeelnemerKlasse.B">B</option>
+                        <option value="@DeelnemerKlasse.C">C</option>
+                    </InputSelect>
+                </div>
+                <div style="margin-left: 15px;">
+                    <label>Selecteer jaar</label>
+                    <InputSelect DisplayName="jaar-selection" class="form-select" multiple aria-label="multiple select example" @bind-Value="_geselecteerdWedstrijdJaar" @oninput="LaadResultatenVanJaar">
+                        @foreach(var jaar in _wedstrijdJaren)
+                        {
+                            <option value="@jaar">@jaar</option>
+                        }
+                    </InputSelect>
+                </div>
+            </div>
+        </div>
+        <div style="margin-bottom: 10px;">
+            @foreach(var wedstrijddag in _wedstrijddagenPerJaar)
+            {
+                <button style="margin-right: 10px;" class="btn btn-primary" @onclick="(() => LaadResultatenVanDag(wedstrijddag))">@wedstrijddag.Day-@wedstrijddag.Month</button>
+            }
+        </div>
+            <EditForm FormName="VrijehandForm" Model="_vrijehandResultaten" OnSubmit="@SaveResultaten">
+                <div class="tableFixHeadLarge">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Naam</th>
+                                <th>KNTS</th>
+                                <th>Datum</th>
+                                <th>Klasse</th>
+                                <th>Score</th>
+                                <th>Aantal kogels</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var vrijehandResultaat in _vrijehandResultaten.Deelnemers)
+                        {
+                            <tr>
+                                <td>@vrijehandResultaat.Naam</td>
+                                <td>@vrijehandResultaat.KNTSNummer</td>
+                                <td>@_geselecteerdeWedstrijddag.ToString("dd-MM-yyyy")</td>
+                                <td>@vrijehandResultaat.Klasse</td>
+                                <td><InputNumber @bind-Value="vrijehandResultaat.Score" placeholder="Vul naam in"></InputNumber></td>
+                                <td><InputNumber @bind-Value="vrijehandResultaat.Score" placeholder="Vul naam in"></InputNumber></td>
+                                @* <td><i @onclick="(() => DeleteResultaat(vrijehandResultaat))" class="bi bi-trash" style="color:#3D040A; cursor: pointer; font-size:20px;"></i></td> *@
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="container-btn-save">
+                    <input type="submit" value="Opslaan" class="btn btn-primary" />
+                </div>
+            </EditForm>
+    }
+</AuthorizeView>

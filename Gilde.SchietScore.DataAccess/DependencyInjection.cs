@@ -17,8 +17,15 @@ namespace Gilde.SchietScore.Persistence
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<ISchutterRepository, SchutterRepository>();
+            services.AddTransient<IVrijehandRepository, VrijehandRepository>();
+            services.AddTransient<ICompetitieRepository, CompetitieRepository>();
+
             services.AddTransient<ISchutterFactory, SchutterFactory>();
+            services.AddTransient<IVrijehandFactory, VrijehandFactory>();
+            services.AddTransient<ICompetitieFactory, CompetitieFactory>();
+
             services.AddTransient<ISchutterBuilder, SchutterBuilder>();
+            services.AddTransient<IVrijehandBuilder, VrijehandBuilder>();
 
             var connectionString = configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             services.AddDbContext<SchietScoreDbContext>(options =>

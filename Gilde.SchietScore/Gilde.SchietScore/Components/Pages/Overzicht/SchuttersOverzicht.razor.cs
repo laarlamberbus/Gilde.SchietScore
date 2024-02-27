@@ -3,12 +3,12 @@ using Gilde.SchietScore.Domain;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace Gilde.SchietScore.Components.Pages.DeelnemerPages
+namespace Gilde.SchietScore.Components.Pages.Overzicht
 {
     public partial class SchuttersOverzicht
     {
         [Inject]
-        private IJSRuntime _jsRuntime {  get; set; }
+        private IJSRuntime _jsRuntime { get; set; }
         [Inject]
         private NavigationManager _navigationManager { get; set; }
         [Inject]
@@ -28,7 +28,8 @@ namespace Gilde.SchietScore.Components.Pages.DeelnemerPages
             if (_schutters != null)
             {
                 _schutterRepository.Update(_schutters);
-                await _schutterRepository.Create(_nieuweSchutter);
+                if(_nieuweSchutter.Naam != null && _nieuweSchutter.KNTSNummer != null)
+                    await _schutterRepository.Create(_nieuweSchutter);
                 await _schutterRepository.SaveChanges();
             }
             _navigationManager.NavigateTo("schutters", true);

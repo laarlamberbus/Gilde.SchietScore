@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public DateOnly StartDatum { get; set; }
         public DateOnly EndDatum { get; set; }
+        public bool IsAfgerond { get; set; }
         public List<KorpsDto> Korpsen { get; set; }
     }
 }

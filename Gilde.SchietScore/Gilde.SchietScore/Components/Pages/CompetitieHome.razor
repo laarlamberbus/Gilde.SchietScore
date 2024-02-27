@@ -1,0 +1,49 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+<PageTitle>Competitie</PageTitle>
+<AuthorizeView Context="CompetitieHomeAuthorization">
+    @if(_huidigeCompetitie == null && _isLopendeCompetitie)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <EditForm FormName="CompetitieForm" Model="_huidigeCompetitie" OnSubmit="@HandleCompetitie">
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <h1>@_competitieNaam</h1>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">@_buttonText</button>
+                </div>
+            </div>
+            @if (_isLopendeCompetitie)
+            {
+                <div>
+                    De huidige @_huidigeCompetitie.Name
+                </div>
+            }
+            else
+            {
+                <div style="display: flex; flex-direction: column; max-width: 300px;">
+                    <label>Competitie naam</label>
+                    <InputSelect DisplayName="competitienaam-selection" class="form-select" multiple aria-label="multiple select example" @bind-Value="_competitieNaam">
+                        <option selected value="Winter competitie @_today.Year">Winter competitie @_today.Year</option>
+                        <option value="Zomer competitie @_today.Year">Zomer competitie @_today.Year</option>
+                    </InputSelect>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>
+                            <label>Startdatum</label>
+                            <InputDate class="form-select" @bind-Value="_huidigeCompetitie.StartDate"></InputDate>
+                        </div>
+                        <div>
+                            <label>Einddatum</label>
+                            <InputDate class="form-select" @bind-Value="_huidigeCompetitie.EndDate"></InputDate>
+                        </div>
+                    </div>
+                </div>
+            }
+        </EditForm>
+    }
+</AuthorizeView>

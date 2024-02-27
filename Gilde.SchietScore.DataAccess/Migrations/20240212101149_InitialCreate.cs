@@ -75,7 +75,7 @@ namespace Gilde.SchietScore.Persistence.Migrations
                     Naam = table.Column<string>(type: "text", nullable: false),
                     KNTSNummer = table.Column<string>(type: "text", nullable: false),
                     IsSchietendLid = table.Column<bool>(type: "boolean", nullable: false),
-                    DeelnemerClassType = table.Column<string>(type: "text", nullable: false),
+                    Klasse = table.Column<string>(type: "text", nullable: false),
                     SoftDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -89,7 +89,9 @@ namespace Gilde.SchietScore.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Naam = table.Column<string>(type: "text", nullable: false)
+                    Naam = table.Column<string>(type: "text", nullable: false),
+                    StartDatum = table.Column<DateOnly>(type: "date", nullable: false),
+                    EindDatum = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -253,7 +255,9 @@ namespace Gilde.SchietScore.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Datum = table.Column<DateOnly>(type: "date", nullable: false),
                     Score = table.Column<int>(type: "integer", nullable: false),
+                    AantalKogels = table.Column<int>(type: "integer", nullable: false),
                     WedstrijdId = table.Column<int>(type: "integer", nullable: false),
                     DeelnemerId = table.Column<int>(type: "integer", nullable: false)
                 },

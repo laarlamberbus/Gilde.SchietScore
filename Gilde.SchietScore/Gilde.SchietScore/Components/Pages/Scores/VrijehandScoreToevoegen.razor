@@ -1,0 +1,57 @@
+﻿@page "/vrijehand-toevoegen"
+@using Gilde.SchietScore.Domain
+@rendermode InteractiveServer
+@inject IJSRuntime JsRuntime
+
+<PageTitle>Vrijehand resultaten toevoegen</PageTitle>
+<AuthorizeView Context="VrijehandToevoegenAuthorization">
+    @if (_deelnemers == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <EditForm FormName="VrijehandForm" Model="_deelnemers" OnSubmit="@SaveResultaten">
+            <div style="display:flex; justify-content:space-between; align-items: center;">
+                <div>
+                    <h1>Vrijehand resultaten toevoegen</h1>
+
+                    <p>Dit is een overzicht van alle resultaten vrijehand</p>
+                </div>
+                <div>
+                    <InputDate Type="InputDateType.Date" @bind-Value="_invoerDatum"></InputDate>
+                </div>
+            </div>
+            <div class="tableFixHeadLarge">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Naam</th>
+                            <th>KNTS</th>
+                            <th>Klasse</th>
+                            <th>Datum</th>
+                            <th>Score</th>
+                            <th>Aantal kogels</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var deelnemer in _deelnemers)
+                        {
+                            <tr>
+                                <td>@deelnemer.Naam</td>
+                                <td>@deelnemer.KNTSNummer</td>
+                                <td>@deelnemer.Klasse</td>
+                                <td>@_invoerDatum.ToString("dd-MM-yyyy")</td>
+                                <td><InputNumber @bind-Value="deelnemer.Score" placeholder="Vul score in"></InputNumber></td>
+                                <td><InputNumber @bind-Value="deelnemer.AantalKogels" placeholder="Vul aantal kogels in"></InputNumber></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="container-btn-save">
+                <input type="submit" value="Opslaan" class="btn btn-primary" />
+            </div>
+        </EditForm>
+    }
+</AuthorizeView>
