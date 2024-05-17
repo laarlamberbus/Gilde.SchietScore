@@ -1,4 +1,5 @@
 ﻿using Gilde.SchietScore.Domain;
+using Gilde.SchietScore.Domain.Enums;
 using Gilde.SchietScore.Persistence.Dtos;
 using Gilde.SchietScore.Persistence.Factories.Interfaces;
 
@@ -6,11 +7,32 @@ namespace Gilde.SchietScore.Persistence.Factories
 {
     public class WedstrijdFactory : IWedstrijdFactory
     {
-        private SchutterFactory _schutterFactory;
+        //private SchutterFactory _schutterFactory;
 
-        public WedstrijdFactory(SchutterFactory schutterFactory) 
-        { 
-            _schutterFactory = schutterFactory;
+        //public WedstrijdFactory(SchutterFactory schutterFactory) 
+        //{ 
+        //    _schutterFactory = schutterFactory;
+        //}
+
+        public Schutter CreateModel(LidDto dto)
+        {
+            return new Schutter
+            {
+                Id = dto.Id,
+                Naam = dto.Naam,
+                KNTSNummer = dto.KNTSNummer,
+                DeelnemerKlasseType = (DeelnemerKlasseType)Enum.Parse(typeof(DeelnemerKlasseType), dto.DeelnemerClassType),
+            };
+        }
+
+        public List<Schutter> CreateModels(List<LidDto> dtos)
+        {
+            var schutters = new List<Schutter>();
+            foreach (var d in dtos)
+            {
+                schutters.Add(CreateModel(d));
+            }
+            return schutters;
         }
 
         public Opgelegd CreateOpgelegdModel(WedstrijdDto dto)
@@ -19,7 +41,7 @@ namespace Gilde.SchietScore.Persistence.Factories
             {
                 StartDatum = dto.StartDatum,
                 EindDatum = dto.EindDatum,
-                Deelnemers = _schutterFactory.CreateModels(dto.Deelnemers)
+                Deelnemers = CreateModels(dto.Deelnemers)
             };
         }
 
@@ -29,7 +51,7 @@ namespace Gilde.SchietScore.Persistence.Factories
             {
                 StartDatum = dto.StartDatum,
                 EindDatum = dto.EindDatum,
-                Deelnemers = _schutterFactory.CreateModels(dto.Deelnemers)
+                Deelnemers = CreateModels(dto.Deelnemers)
             };
         }
 
@@ -39,7 +61,7 @@ namespace Gilde.SchietScore.Persistence.Factories
             {
                 StartDatum = dto.StartDatum,
                 EindDatum = dto.EindDatum,
-                Deelnemers = _schutterFactory.CreateModels(dto.Deelnemers)
+                Deelnemers = CreateModels(dto.Deelnemers)
             };
         }
 

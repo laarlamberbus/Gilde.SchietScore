@@ -5,23 +5,23 @@ using Microsoft.AspNetCore.Components;
 
 namespace Gilde.SchietScore.Components
 {
-    public abstract class WedstrijdBase : BaseComponent
+    public abstract class WedstrijdBase : CompetitieBase
     {
         [Inject]
         protected ISchutterRepository SchutterRepository { get; set; }
 
         protected IEnumerable<Schutter> DeelnemersLijst { get; set; }
-        protected Vrijehand? vrijehandResultaten = new Vrijehand();
+        protected Vrijehand? vrijehandResultaten;
+                              
         protected DateOnly? wedstrijdDatum;
         protected DateOnly geselecteerdWedstrijdJaar;
         protected DateOnly geselecteerdeWedstrijdWeek;
         protected DeelnemerKlasseType deelnemerKlasse;
         protected bool isNewResultaatForm = true;
 
-        protected override async Task OnInitializedAsync()
+        protected async override Task OnInitializedAsync()
         {
             DeelnemersLijst = await SchutterRepository.ReadAll();
-            vrijehandResultaten.Deelnemers = DeelnemersLijst.ToList();
             wedstrijdDatum = DateOnly.FromDateTime(DateTime.Today);
         }
     }

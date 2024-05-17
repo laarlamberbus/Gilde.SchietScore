@@ -13,8 +13,8 @@ namespace Gilde.SchietScore.Components.Pages.Wedstrijden
 
         protected async new Task OnInitializedAsync()
         {
-            var wedstrijd = await VrijehandRepository.ReadLatest();
-            vrijehandResultaten = await ResultaatRepository.ReadLatest(wedstrijd.Id);
+            var wedstrijd = 1;// await VrijehandRepository.Re();
+            vrijehandResultaten = await ResultaatRepository.ReadLatest(wedstrijd);
         }
 
         private void SubmitVrijehadForm(Wedstrijd model)
