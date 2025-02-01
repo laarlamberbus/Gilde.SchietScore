@@ -22,7 +22,7 @@ namespace Gilde.SchietScore.Factories
             }
             return scoreAddForm;
         }
-        public ScoreForm CreateEditForm(Member member, List<GameElement> gameElements, List<Score> scoreOfMember)
+        public ScoreForm CreateEditForm(Member member, List<GameElement> gameElements, List<ScoreTwee> scoreOfMember)
         {
             if(scoreOfMember.All(s => s.MemberId != member.Id))
                 throw new Exception($"ScoreFormFactory.CreateEditForm(Member,List<GameElement>,Score) | The inputed scoreOfMember is not from the same member {member.Id}");
@@ -49,14 +49,14 @@ namespace Gilde.SchietScore.Factories
             }
             return scoreAddForm;
         }
-        public List<Score> CreateScores(List<ScoreForm> scoreForms, DateOnly scoreDate)
+        public List<ScoreTwee> CreateScores(List<ScoreForm> scoreForms, DateOnly scoreDate)
         {
-            var scores = new List<Score>();
+            var scores = new List<ScoreTwee>();
             foreach (var scoreForm in scoreForms)
             {
                 foreach (var scoreRow in scoreForm.ScoreAddRows)
                 {
-                    scores.Add(new Score()
+                    scores.Add(new ScoreTwee()
                     {
                         Id = scoreRow.ScoreId,
                         MemberId = scoreForm.MemberId,

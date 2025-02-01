@@ -18,7 +18,7 @@ namespace Gilde.SchietScore.Components.Pages
 
         public int SelectedYear { get; set; } = DateTime.Now.Year;
         public DateOnly? SelectedWeek { get; set; }
-        public Korps SelectedKorps { get; set; } = KorpsList.AllKorps.Single(k => k.Level == 0);
+        public Korps SelectedKorps { get; set; } = KorpsList.ExistingKorps.Single(k => k.Level == 0);
         public List<DateOnly> AllGameWeeks { get; set; }
         public List<int> AllGameYears { get; set; }
         public string Title { get; set; } = $"Uitslagen {_currentYear}";
@@ -27,7 +27,7 @@ namespace Gilde.SchietScore.Components.Pages
         private List<GameElement> _uniqueGameElements;
         private List<ScoreForm> _scoreEditForms;
 
-        private List<Score>? _scores;
+        private List<ScoreTwee>? _scores;
 
         protected override async Task OnInitializedAsync()
         {

@@ -30,5 +30,11 @@ namespace Gilde.SchietScore.Data.Services
                 .ToListAsync();
             return result;
         }
+
+        public async Task AddMembers(Member memberToAdd)
+        {
+            await _context.Members.AddAsync(memberToAdd);
+            await _context.SaveChangesAsync(CancellationToken.None);
+        }
     }
 }

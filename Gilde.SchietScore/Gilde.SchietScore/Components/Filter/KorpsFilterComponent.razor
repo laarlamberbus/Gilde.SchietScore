@@ -4,7 +4,7 @@
         @SelectedKorps.Name
     </button>
     <ul class="dropdown-menu" aria-labelledby="korpsDropdown">
-        @foreach (var korps in KorpsList.AllKorps)
+        @foreach (var korps in KorpsList.ExistingKorps)
         {
             <li><a class="dropdown-item" @onclick="@(() => OnKorpsSelection(korps))">@korps.Name</a></li>
         }

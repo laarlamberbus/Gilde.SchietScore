@@ -11,13 +11,13 @@ namespace Gilde.SchietScore.Components.Pages
 
         public int SelectedYear { get; set; } = _currentYear;
         public DateOnly? SelectedWeek { get; set; }
-        public Korps SelectedKorps { get; set; } = KorpsList.AllKorps.Single(k => k.Level == 1);
+        public Korps SelectedKorps { get; set; } = KorpsList.ExistingKorps.Single(k => k.Level == 1);
         public List<DateOnly> AllGameWeeks { get; set; }
         public List<int> AllGameYears { get; set; }
 
         public string Title { get; set; } = $"Uitslagen {_currentYear}";
 
-        private List<Score>? _scores;
+        private List<ScoreTwee>? _scores;
         
         protected override async Task OnInitializedAsync()
         {

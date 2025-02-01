@@ -1,6 +1,6 @@
 ﻿namespace Gilde.SchietScore.Models
 {
-    public class Score
+    public class ScoreTwee
     {
         public int Id { get; set; }
         public int Amount { get; set; }

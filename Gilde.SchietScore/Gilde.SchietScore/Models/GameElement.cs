@@ -7,7 +7,7 @@ namespace Gilde.SchietScore.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
-        public List<Score> Scores { get; set; }
+        public List<ScoreTwee> Scores { get; set; }
     }
 
     public class GameElementComparer : IEqualityComparer<GameElement>

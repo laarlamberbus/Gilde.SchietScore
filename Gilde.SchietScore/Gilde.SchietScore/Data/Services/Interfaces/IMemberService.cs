@@ -5,6 +5,7 @@ namespace Gilde.SchietScore.Data.Services.Interfaces
     public interface IMemberService
     {
         public Task<List<Member>> GetMembers();
+        public Task AddMembers(Member memberToAdd);
         public Task<List<Member>> GetMembers(bool isShootingMember);
     }
 }
