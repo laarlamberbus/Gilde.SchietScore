@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -51,32 +52,32 @@ namespace Gilde.SchietScore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GameElements",
+                name: "Leden",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Level = table.Column<int>(type: "integer", nullable: false)
+                    Naam = table.Column<string>(type: "text", nullable: false),
+                    IsSchietendLid = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameElements", x => x.Id);
+                    table.PrimaryKey("PK_Leden", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Members",
+                name: "Wedstrijden",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Level = table.Column<int>(type: "integer", nullable: false),
-                    IsShootingMember = table.Column<bool>(type: "boolean", nullable: false)
+                    Naam = table.Column<string>(type: "text", nullable: false),
+                    StartDatum = table.Column<DateOnly>(type: "date", nullable: false),
+                    EindDatum = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Members", x => x.Id);
+                    table.PrimaryKey("PK_Wedstrijden", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,23 +193,22 @@ namespace Gilde.SchietScore.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Amount = table.Column<int>(type: "integer", nullable: false),
-                    Date = table.Column<DateOnly>(type: "date", nullable: false),
-                    GameElementId = table.Column<int>(type: "integer", nullable: false),
-                    MemberId = table.Column<int>(type: "integer", nullable: false)
+                    WedstrijdId = table.Column<int>(type: "integer", nullable: false),
+                    DeelnemerId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Scores", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Scores_GameElements_GameElementId",
-                        column: x => x.GameElementId,
-                        principalTable: "GameElements",
+                        name: "FK_Scores_Leden_DeelnemerId",
+                        column: x => x.DeelnemerId,
+                        principalTable: "Leden",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Scores_Members_MemberId",
-                        column: x => x.MemberId,
-                        principalTable: "Members",
+                        name: "FK_Scores_Wedstrijden_WedstrijdId",
+                        column: x => x.WedstrijdId,
+                        principalTable: "Wedstrijden",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -251,14 +251,14 @@ namespace Gilde.SchietScore.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Scores_GameElementId",
+                name: "IX_Scores_DeelnemerId",
                 table: "Scores",
-                column: "GameElementId");
+                column: "DeelnemerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Scores_MemberId",
+                name: "IX_Scores_WedstrijdId",
                 table: "Scores",
-                column: "MemberId");
+                column: "WedstrijdId");
         }
 
         /// <inheritdoc />
@@ -289,10 +289,10 @@ namespace Gilde.SchietScore.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "GameElements");
+                name: "Leden");
 
             migrationBuilder.DropTable(
-                name: "Members");
+                name: "Wedstrijden");
         }
     }
 }

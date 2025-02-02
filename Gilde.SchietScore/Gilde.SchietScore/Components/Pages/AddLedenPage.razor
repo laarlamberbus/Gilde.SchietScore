@@ -4,7 +4,8 @@
 
 <PageTitle>Leden toevoegen</PageTitle>
 <AuthorizeView Context="Auth">
-    <EditForm Model=@_scoreAddForms OnSubmit=@SubmitScoreFrom>
+    <EditForm Model=@_ledenAddForms OnSubmit=@SubmitScoreFrom>
+        <AntiforgeryToken />
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h1>Leden toevoegen</h1>
         </div>
@@ -17,23 +18,33 @@
             <thead>
                 <tr>
                     <th>Naam</th>
-                    <th>Korps</th>
                     <th>Schietendlid</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><th></th></tr>
-                <tr><th></th></tr>
-                <tr><th></th></tr>
+            @foreach(var lid in _ledenAddForms){
+                <tr>
+                    <th>
+                        <InputText @bind-Value="@lid.Naam" />
+                    </th>
+                    <th>
+                        <InputCheckbox @bind-Value="@lid.IsSchietendLid" />
+                    </th>
+                </tr>
+            }
             </tbody>
         </table>
     </div>
-    @if (_shootingMembers != null)
-    {
-        <div style="display: flex; justify-content: flex-end; align-items: center; margin-top: 20px;">
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        <div>
+            <input type="button" class="btn btn-primary" value="Regel toevoegen" @onclick="AddExtraLid" />
+            <input type="button" class="btn btn-primary" value="Laatste regel verwijderen" @onclick="RemoveExtraLid" />
+        </div>
+        <div>
             <input type="submit" value="Opslaan" class="btn btn-primary" />
         </div>
-    }
+    </div>
     </EditForm>
     
 </AuthorizeView>

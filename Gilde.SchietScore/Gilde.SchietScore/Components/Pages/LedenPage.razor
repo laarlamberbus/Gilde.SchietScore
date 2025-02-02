@@ -6,7 +6,7 @@
 
     <p>Dit is een overzicht van alle leden</p>
 
-    @if (_members == null)
+    @if (_leden == null)
     {
         <p><em>Loading...</em></p>
     }
@@ -23,14 +23,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var member in _members)
+                    @foreach (var member in _leden)
                     {
                         <tr>
                             <td>@member.Id</td>
-                            <td>@member.Name</td>
-                            <td>Korps @member.Level</td>
+                            <td>@member.Naam</td>
+                            @* <td>Korps @member.Level</td> *@
                             <td>
-                                @if (member.IsShootingMember)
+                                @if (member.IsSchietendLid)
                                 {
                                     <text>Ja</text>
                                 }

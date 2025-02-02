@@ -4,17 +4,17 @@ using Microsoft.AspNetCore.Components;
 
 namespace Gilde.SchietScore.Components.Pages
 {
-    public partial class MembersPage
+    public partial class LedenPage
     {
         [Inject]
-        private IMemberService? MemberService { get; set; }
+        private ILedenService? LedenService { get; set; }
 
-        public List<Member> _members;
+        public List<Lid> _leden;
 
         protected async override Task OnInitializedAsync()
         {
-            if(MemberService != null)
-                _members = await MemberService.GetMembers();
+            if(LedenService != null)
+                _leden = await LedenService.GetLeden();
         }
     }
 }

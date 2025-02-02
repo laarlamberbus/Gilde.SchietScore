@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Gilde.SchietScore.Migrations
 {
     [DbContext(typeof(SchietScoreDbContext))]
-    [Migration("20250201180159_VersionTwee")]
-    partial class VersionTwee
+    [Migration("20250202145455_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,26 +89,6 @@ namespace Gilde.SchietScore.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Gilde.SchietScore.Models.GameElement", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Level")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GameElements");
-                });
-
             modelBuilder.Entity("Gilde.SchietScore.Models.Lid", b =>
                 {
                     b.Property<int>("Id")
@@ -127,29 +107,6 @@ namespace Gilde.SchietScore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Leden");
-                });
-
-            modelBuilder.Entity("Gilde.SchietScore.Models.Member", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsShootingMember")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("Level")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Members");
                 });
 
             modelBuilder.Entity("Gilde.SchietScore.Models.Score", b =>
@@ -176,35 +133,6 @@ namespace Gilde.SchietScore.Migrations
                     b.HasIndex("WedstrijdId");
 
                     b.ToTable("Scores");
-                });
-
-            modelBuilder.Entity("Gilde.SchietScore.Models.ScoreTwee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("integer");
-
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("date");
-
-                    b.Property<int>("GameElementId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MemberId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameElementId");
-
-                    b.HasIndex("MemberId");
-
-                    b.ToTable("ScoresTwee");
                 });
 
             modelBuilder.Entity("Gilde.SchietScore.Models.Wedstrijd", b =>
@@ -381,25 +309,6 @@ namespace Gilde.SchietScore.Migrations
                     b.Navigation("Wedstrijd");
                 });
 
-            modelBuilder.Entity("Gilde.SchietScore.Models.ScoreTwee", b =>
-                {
-                    b.HasOne("Gilde.SchietScore.Models.GameElement", "GameElement")
-                        .WithMany("Scores")
-                        .HasForeignKey("GameElementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Gilde.SchietScore.Models.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("GameElement");
-
-                    b.Navigation("Member");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -449,11 +358,6 @@ namespace Gilde.SchietScore.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Gilde.SchietScore.Models.GameElement", b =>
-                {
-                    b.Navigation("Scores");
                 });
 #pragma warning restore 612, 618
         }

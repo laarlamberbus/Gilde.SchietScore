@@ -25,8 +25,9 @@ namespace Gilde.SchietScore
             builder.Services.AddScoped<IdentityRedirectManager>();
             builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
             builder.Services.AddTransient<ISchietScoreDbContext, SchietScoreDbContext>();
-            builder.Services.AddTransient<IMemberService, MemberService>();
-            builder.Services.AddTransient<IGameElementService, GameElementService>();
+            builder.Services.AddTransient<ILedenService, LedenService>();
+            builder.Services.AddTransient<IWedstrijdService, WedstrijdService>();
+            builder.Services.AddTransient<IScoreService, ScoreService>();
 
             builder.Services.AddAuthentication(options =>
                 {
